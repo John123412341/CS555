@@ -1,0 +1,42 @@
+Individuals
++-------+----------------------+--------+-------------+-----+-------+-------------+----------+------------------+
+|   ID  |         Name         | Gender |   Birthday  | Age | Alive |    Death    |  Child   |      Spouse      |
++-------+----------------------+--------+-------------+-----+-------+-------------+----------+------------------+
+|  @I1@ |     Maris /Daly/     |   F    | 10 OCT 2001 |  20 |  True |     N/A     | ['@F1@'] |       N/A        |
+|  @I2@ |     John /Daly/      |   M    | 29 APR 1967 |  55 |  True |     N/A     | ['@F2@'] |     ['@F1@']     |
+|  @I3@ |   Susan /Dominick/   |   F    |  9 JAN 1968 |  54 |  True |     N/A     | ['@F3@'] |     ['@F1@']     |
+|  @I4@ |  Anthony /Dominick/  |   M    | 16 AUG 1930 |  59 | False | 28 MAY 1990 |   N/A    |     ['@F3@']     |
+|  @I5@ |    Demaris /Lane/    |   F    | 22 DEC 1932 |  89 |  True |     N/A     |   N/A    |     ['@F3@']     |
+|  @I6@ |     John /Daly/      |   M    | 11 JUL 1943 |  75 | False | 12 APR 2019 |   N/A    |     ['@F2@']     |
+|  @I7@ |   Eileen /Johnson/   |   F    | 21 SEP 1940 |  78 | False |  6 SEP 2019 |   N/A    |     ['@F2@']     |
+|  @I8@ |    Patrick /Daly/    |   M    |  9 JAN 1966 |  56 |  True |     N/A     | ['@F2@'] |     ['@F4@']     |
+|  @I9@ |    Eileen /Daly/     |   F    |  8 JUN 1964 |  58 |  True |     N/A     | ['@F2@'] | ['@F5@', '@F6@'] |
+| @I10@ |    Andrew /Daly/     |   M    | 17 MAR 2004 |  18 |  True |     N/A     | ['@F1@'] |       N/A        |
+| @I11@ |     Jimmy /Daly/     |   M    |  9 DEC 1973 |  48 |  True |     N/A     | ['@F2@'] |       N/A        |
+| @I12@ |    Jeanne /Daly/     |   F    | 11 MAY 1969 |  53 |  True |     N/A     |   N/A    |     ['@F4@']     |
+| @I13@ |    Lindsay /Daly/    |   F    |  2 FEB 2001 |  21 |  True |     N/A     | ['@F4@'] |       N/A        |
+| @I14@ |   Victoria /Daly/    |   F    | 10 SEP 2003 |  19 |  True |     N/A     | ['@F4@'] |       N/A        |
+| @I15@ |     Abby /Daly/      |   F    |  4 MAY 2005 |  17 |  True |     N/A     | ['@F4@'] |       N/A        |
+| @I16@ |    David /Smith/     |   M    |  9 DEC 1960 |  32 | False | 13 NOV 1993 |   N/A    |     ['@F6@']     |
+| @I17@ |   Mike /Sapricone/   |   M    |  7 NOV 1950 |  71 |  True |     N/A     |   N/A    |     ['@F5@']     |
+| @I18@ |   Jessica /Smith/    |   F    | 10 SEP 1992 |  30 |  True |     N/A     | ['@F6@'] |       N/A        |
+| @I19@ | Victoria /Sapricone/ |   F    |  8 OCT 1997 |  24 |  True |     N/A     | ['@F5@'] |       N/A        |
+| @I20@ |  Ashley /Sapricone/  |   F    |  8 OCT 1997 |  24 |  True |     N/A     | ['@F5@'] |       N/A        |
+| @I21@ |  Jeffrey /Dominick/  |   M    |  1 JAN 1965 |  57 |  True |     N/A     | ['@F3@'] |     ['@F7@']     |
+| @I22@ |   Amy /Stepnowski/   |   F    |  5 JUN 1967 |  55 |  True |     N/A     |   N/A    |     ['@F7@']     |
+| @I23@ |    JJ /Dominick/     |   M    | 11 AUG 2000 |  22 |  True |     N/A     | ['@F7@'] |       N/A        |
+| @I24@ |   Cara /Dominick/    |   F    |  7 OCT 2002 |  19 |  True |     N/A     | ['@F7@'] |       N/A        |
+| @I25@ |   Lance /Dominick/   |   M    | 13 SEP 2004 |  18 |  True |     N/A     | ['@F7@'] |       N/A        |
++-------+----------------------+--------+-------------+-----+-------+-------------+----------+------------------+
+Families
++------+-------------+----------+------------+--------------------+---------+------------------+-----------------------------------+
+|  ID  |   Married   | Divorced | Husband ID |    Husband Name    | Wife ID |    Wife Name     |              Children             |
++------+-------------+----------+------------+--------------------+---------+------------------+-----------------------------------+
+| @F1@ | 31 OCT 1993 |   N/A    |    @I2@    |    John /Daly/     |   @I3@  | Susan /Dominick/ |         ['@I1@', '@I10@']         |
+| @F2@ |  2 JUL 1955 |   N/A    |    @I6@    |    John /Daly/     |   @I7@  | Eileen /Johnson/ | ['@I2@', '@I8@', '@I9@', '@I11@'] |
+| @F3@ |  4 OCT 1953 |   N/A    |    @I4@    | Anthony /Dominick/ |   @I5@  |  Demaris /Lane/  |         ['@I3@', '@I21@']         |
+| @F4@ | 27 FEB 1991 |   N/A    |    @I8@    |   Patrick /Daly/   |  @I12@  |  Jeanne /Daly/   |    ['@I13@', '@I14@', '@I15@']    |
+| @F5@ |  7 MAR 1995 |   N/A    |   @I17@    |  Mike /Sapricone/  |   @I9@  |  Eileen /Daly/   |         ['@I19@', '@I20@']        |
+| @F6@ |  3 JUN 1987 |   N/A    |   @I16@    |   David /Smith/    |   @I9@  |  Eileen /Daly/   |             ['@I18@']             |
+| @F7@ |  7 APR 1990 |   N/A    |   @I21@    | Jeffrey /Dominick/ |  @I22@  | Amy /Stepnowski/ |    ['@I23@', '@I24@', '@I25@']    |
++------+-------------+----------+------------+--------------------+---------+------------------+-----------------------------------+
