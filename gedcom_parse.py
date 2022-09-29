@@ -181,7 +181,16 @@ for indiv in indivs:
     if indiv["Birthday"] > indiv["Death"]:
         output += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Death, " + indiv["Death"] + " occurs before birth, " + indiv["Birthday"] + ".\n")
 #checks if birth is before marriage. 
-
+for fam in fams:
+    husb_id = fam["Husband ID"]
+    wife_id = fam["Wife ID"]
+    for indiv in inidvs:
+        if indiv["ID"] == husb_id:
+            if indiv["Birthday"] > fam["Married"]:
+                ouput += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
+        if indiv["ID"] == wife_id:
+            if indiv["Birthday"] > fam["Married"]:
+                ouput += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
     
 
 # Open output file
