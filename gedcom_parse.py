@@ -171,9 +171,9 @@ for fam in fams:
 
 # print("Families")
 # print(fam_table)
-output += "Families\n"
+output += "Families \n"
 output += str(fam_table)
-output += "\n"
+output += " \n"
 # Giovanni Sprint 1
 
 #checks if birth is before death.   
@@ -184,13 +184,13 @@ for indiv in indivs:
 for fam in fams:
     husb_id = fam["Husband ID"]
     wife_id = fam["Wife ID"]
-    for indiv in inidvs:
+    for indiv in indivs:
         if indiv["ID"] == husb_id:
             if indiv["Birthday"] > fam["Married"]:
-                ouput += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
+                output += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
         if indiv["ID"] == wife_id:
             if indiv["Birthday"] > fam["Married"]:
-                ouput += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
+                output += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
     
 
 # Open output file
