@@ -173,6 +173,16 @@ for fam in fams:
 # print(fam_table)
 output += "Families\n"
 output += str(fam_table)
+output += "\n"
+# Giovanni Sprint 1
+
+#checks if birth is before death.   
+for indiv in indivs:
+    if indiv["Birthday"] > indiv["Death"]:
+        output += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Death, " + indiv["Death"] + " occurs before birth, " + indiv["Birthday"] + ".\n")
+#checks if birth is before marriage. 
+
+    
 
 # Open output file
 output_filename = "output.txt"
