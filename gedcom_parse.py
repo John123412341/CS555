@@ -1,4 +1,5 @@
 import datetime
+from datetime import datetime as dt
 from prettytable import PrettyTable
 
 valid_tags = ["0 INDI", "1 NAME", "1 SEX", "1 BIRT", "1 DEAT", "1 FAMC", "1 FAMS", "0 FAM", "1 MARR", "1 HUSB", "1 WIFE", "1 CHIL", "1 DIV", "2 DATE", "0 HEAD", "0 TRLR", "0 NOTE"]
@@ -174,6 +175,7 @@ for fam in fams:
 output += "Families \n"
 output += str(fam_table)
 output += " \n"
+
 # Giovanni Sprint 1
 
 #checks if birth is before death.   
@@ -192,6 +194,25 @@ for fam in fams:
             if indiv["Birthday"] > fam["Married"]:
                 output += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
     
+# Daly Sprint 1
+
+# check if marriage is before death
+for fam in fams:
+    for indiv in indivs:
+        if indiv['ID'] == fam["Husband ID"]:
+            if indiv['Death'] != "N/A":
+                if dt.strptime(indiv['Death'], '%d %b %Y') < dt.strptime(fam['Married'], '%d %b %Y'):
+                    output += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")
+        if indiv['ID'] == fam["Wife ID"]:
+            if indiv['Death'] != "N/A":
+                if dt.strptime(indiv['Death'], '%d %b %Y') < dt.strptime(fam['Married'], '%d %b %Y'):
+                    output += ("ERROR: INDIVIDUAL: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")   
+                    
+# check if marriage is before divorce
+for fam in fams:
+    if fam['Divorced'] != "N/A":
+        if dt.strptime(fam['Married'], '%d %b %Y') > dt.strptime(fam['Divorced'], '%d %b %Y'):
+            output += ("ERROR: FAMILY: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " occurs before divorce, " + fam["Divorced"] + "\n")
 
 # Open output file
 output_filename = "output.txt"
