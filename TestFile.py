@@ -224,7 +224,7 @@ for fam in fams:
 for fam in fams:
     if fam['Divorced'] != "N/A":
         if dt.strptime(fam['Married'], '%d %b %Y') > dt.strptime(fam['Divorced'], '%d %b %Y'):
-            output += ("ERROR: FAMILY: US04: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " occurs before divorce, " + fam["Divorced"] + "\n")
+            output += ("ERROR: FAMILY: US04: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " occurs after divorce, " + fam["Divorced"] + "\n")
 
 # Anton Sprint 1
 

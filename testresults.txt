@@ -14,7 +14,7 @@ Families
 ERROR: INDIVIDUAL: US03:@I2@: Death, 1 FEB 1960 occurs before birth, 2 MAY 2000.
 ERROR: INDIVIDUAL: US05: @I1@: Marriage date, 2 FEB 2040 occurs before death, 1 FEB 2025
 ERROR: INDIVIDUAL: US05: @I2@: Marriage date, 2 FEB 2040 occurs before death, 1 FEB 1960
-ERROR: FAMILY: US04: @F1@: Marriage date, 2 FEB 2040 occurs before divorce, 2 FEB 1995
+ERROR: FAMILY: US04: @F1@: Marriage date, 2 FEB 2040 occurs after divorce, 2 FEB 1995
 ERROR: INDIVIDUAL: US07: @I1@: Age, 249 is not less than 150 years old
 ERROR: INDIVIDUAL: US01: @I1@: Death date, 1 FEB 2025 is after the current date
 ERROR: FAMILY: US01: @F1@: Marriage date, 2 FEB 2040 is after the current date

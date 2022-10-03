@@ -214,17 +214,17 @@ for fam in fams:
         if indiv['ID'] == fam["Husband ID"]:
             if indiv['Death'] != "N/A":
                 if dt.strptime(indiv['Death'], '%d %b %Y') < dt.strptime(fam['Married'], '%d %b %Y'):
-                    output += ("ERROR: INDIVIDUAL: US05" + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")
+                    output += ("ERROR: INDIVIDUAL: US05: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")
         if indiv['ID'] == fam["Wife ID"]:
             if indiv['Death'] != "N/A":
                 if dt.strptime(indiv['Death'], '%d %b %Y') < dt.strptime(fam['Married'], '%d %b %Y'):
-                    output += ("ERROR: INDIVIDUAL: US05" + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")   
+                    output += ("ERROR: INDIVIDUAL: US05: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")   
                     
 # Check if marriage is before divorce
 for fam in fams:
     if fam['Divorced'] != "N/A":
         if dt.strptime(fam['Married'], '%d %b %Y') > dt.strptime(fam['Divorced'], '%d %b %Y'):
-            output += ("ERROR: FAMILY: US04: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " occurs before divorce, " + fam["Divorced"] + "\n")
+            output += ("ERROR: FAMILY: US04: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " occurs after divorce, " + fam["Divorced"] + "\n")
 
 # Anton Sprint 1
 
