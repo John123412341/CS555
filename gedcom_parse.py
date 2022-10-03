@@ -178,12 +178,13 @@ output += " \n"
 
 # Giovanni Sprint 1
 
-#checks if birth is before death.   
+# Checks if birth is before death.   
 for indiv in indivs:
     if indiv["Birthday"] > indiv["Death"]:
         if indiv['Death'] != "N/A":
             output += ("ERROR: INDIVIDUAL: US03:" + indiv["ID"] + ": Death, " + indiv["Death"] + " occurs before birth, " + indiv["Birthday"] + ".\n")
-#checks if birth is before marriage. 
+
+# Checks if birth is before marriage. 
 for fam in fams:
     husb_id = fam["Husband ID"]
     wife_id = fam["Wife ID"]
@@ -197,7 +198,7 @@ for fam in fams:
     
 # Daly Sprint 1
 
-# check if marriage is before death
+# Check if marriage is before death
 for fam in fams:
     for indiv in indivs:
         if indiv['ID'] == fam["Husband ID"]:
@@ -209,11 +210,49 @@ for fam in fams:
                 if dt.strptime(indiv['Death'], '%d %b %Y') < dt.strptime(fam['Married'], '%d %b %Y'):
                     output += ("ERROR: INDIVIDUAL: US05" + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")   
                     
-# check if marriage is before divorce
+# Check if marriage is before divorce
 for fam in fams:
     if fam['Divorced'] != "N/A":
         if dt.strptime(fam['Married'], '%d %b %Y') > dt.strptime(fam['Divorced'], '%d %b %Y'):
             output += ("ERROR: FAMILY: US04: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " occurs before divorce, " + fam["Divorced"] + "\n")
+
+# Anton Sprint 1
+
+# Check if all ages are less than 150 years old
+for indiv in indivs:
+  if indiv["Age"] >= 150:
+    output += ("ERROR: INDIVIDUAL: US07: " + indiv["ID"] + ": Age, " + indiv["Age"] + " is not less than 150 years old\n")
+
+# Check if all dates are before current date
+full_today = datetime.datetime.now()
+for indiv in indivs:
+  full_bday = indiv["Birthday"].split()
+  if (full_today.year < int(full_bday[2]) or
+      (full_today.year == int(full_bday[2]) and 
+       (full_today.month < months.index(full_bday[1])+1 or 
+        (full_today.month == months.index(full_bday[1])+1 and full_today.day < int(full_bday[0]))))):
+    output += ("ERROR: INDIVIDUAL: US01: " + indiv["ID"] + ": Birthday, " + indiv["Birthday"] + " is after the current date\n")
+  full_dday = indiv["Death"].split()
+  if (full_today.year < int(full_dday[2]) or
+      (full_today.year == int(full_dday[2]) and 
+       (full_today.month < months.index(full_dday[1])+1 or 
+        (full_today.month == months.index(full_dday[1])+1 and full_today.day < int(full_dday[0]))))):
+    output += ("ERROR: INDIVIDUAL: US01: " + indiv["ID"] + ": Death date, " + indiv["Death"] + " is after the current date\n")
+for fam in fams:
+  married_date = fam["Married"].split()
+  if (full_today.year < int(married_date[2]) or
+      (full_today.year == int(married_date[2]) and 
+       (full_today.month < months.index(married_date[1])+1 or 
+        (full_today.month == months.index(married_date[1])+1 and full_today.day < int(married_date[0]))))):
+    output += ("ERROR: FAMILY: US01: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " is after the current date\n")
+  divorced_date = fam["Divorced"]
+  if divorced_date != "N/A":
+    divorced_date = divorced_date.split()
+    if (full_today.year < int(divorced_date[2]) or
+        (full_today.year == int(divorced_date[2]) and 
+         (full_today.month < months.index(divorced_date[1])+1 or 
+          (full_today.month == months.index(divorced_date[1])+1 and full_today.day < int(divorced_date[0]))))):
+      output += ("ERROR: FAMILY: US01: " + fam["ID"] + ": Divorce date, " + fam["Divorced"] + " is after the current date\n")
 
 # Open output file
 output_filename = "output.txt"
