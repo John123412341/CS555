@@ -186,7 +186,7 @@ for indiv in indivs:
         if (int(full_dday[2]) < int(full_bday[2]) and
            (months.index(full_dday[1])+1 < months.index(full_bday[1])+1 and 
             int(full_dday[0]) < int(full_bday[0]))):
-            output += ("ERROR: INDIVIDUAL: US03:" + indiv["ID"] + ": Death, " + indiv["Death"] + " occurs before birth, " + indiv["Birthday"] + ".\n")
+            output += ("ERROR: INDIVIDUAL: US03: " + indiv["ID"] + ": Death, " + indiv["Death"] + " occurs before birth, " + indiv["Birthday"] + ".\n")
 
 # Checks if birth is before marriage. 
 for fam in fams:
