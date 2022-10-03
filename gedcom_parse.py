@@ -181,7 +181,8 @@ output += " \n"
 #checks if birth is before death.   
 for indiv in indivs:
     if indiv["Birthday"] > indiv["Death"]:
-        output += ("ERROR: INDIVIDUAL: US03:" + indiv["ID"] + ": Death, " + indiv["Death"] + " occurs before birth, " + indiv["Birthday"] + ".\n")
+        if indiv['Death'] != "N/A":
+            output += ("ERROR: INDIVIDUAL: US03:" + indiv["ID"] + ": Death, " + indiv["Death"] + " occurs before birth, " + indiv["Birthday"] + ".\n")
 #checks if birth is before marriage. 
 for fam in fams:
     husb_id = fam["Husband ID"]
