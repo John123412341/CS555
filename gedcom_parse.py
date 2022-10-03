@@ -194,7 +194,7 @@ for fam in fams:
     wife_id = fam["Wife ID"]
     for indiv in indivs:
         full_bday = indiv["Birthday"].split()
-        full_mday = indiv["Married"].split()
+        full_mday = fam["Married"].split()
         if indiv["ID"] == husb_id:
             if (int(full_mday[2]) < int(full_bday[2]) and
            (months.index(full_mday[1])+1 < months.index(full_bday[1])+1 and 
@@ -242,12 +242,14 @@ for indiv in indivs:
        (full_today.month < months.index(full_bday[1])+1 or 
         (full_today.month == months.index(full_bday[1])+1 and full_today.day < int(full_bday[0]))))):
     output += ("ERROR: INDIVIDUAL: US01: " + indiv["ID"] + ": Birthday, " + indiv["Birthday"] + " is after the current date\n")
-  full_dday = indiv["Death"].split()
-  if (full_today.year < int(full_dday[2]) or
-      (full_today.year == int(full_dday[2]) and 
-       (full_today.month < months.index(full_dday[1])+1 or 
-        (full_today.month == months.index(full_dday[1])+1 and full_today.day < int(full_dday[0]))))):
-    output += ("ERROR: INDIVIDUAL: US01: " + indiv["ID"] + ": Death date, " + indiv["Death"] + " is after the current date\n")
+  full_dday = indiv["Death"]
+  if full_dday != "N/A":
+    full_dday = full_dday.split()
+    if (full_today.year < int(full_dday[2]) or
+        (full_today.year == int(full_dday[2]) and 
+        (full_today.month < months.index(full_dday[1])+1 or 
+          (full_today.month == months.index(full_dday[1])+1 and full_today.day < int(full_dday[0]))))):
+      output += ("ERROR: INDIVIDUAL: US01: " + indiv["ID"] + ": Death date, " + indiv["Death"] + " is after the current date\n")
 for fam in fams:
   married_date = fam["Married"].split()
   if (full_today.year < int(married_date[2]) or
