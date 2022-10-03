@@ -180,8 +180,12 @@ output += " \n"
 
 # Checks if birth is before death.   
 for indiv in indivs:
-    if indiv["Birthday"] > indiv["Death"]:
-        if indiv['Death'] != "N/A":
+    if indiv['Death'] != "N/A":
+        full_bday = indiv["Birthday"].split()
+        full_dday = indiv["Death"].split()
+        if (int(full_dday[2]) < int(full_bday[2]) and
+           (months.index(full_dday[1])+1 < months.index(full_bday[1])+1 and 
+            int(full_dday[0]) < int(full_bday[0]))):
             output += ("ERROR: INDIVIDUAL: US03:" + indiv["ID"] + ": Death, " + indiv["Death"] + " occurs before birth, " + indiv["Birthday"] + ".\n")
 
 # Checks if birth is before marriage. 
@@ -189,11 +193,17 @@ for fam in fams:
     husb_id = fam["Husband ID"]
     wife_id = fam["Wife ID"]
     for indiv in indivs:
+        full_bday = indiv["Birthday"].split()
+        full_mday = indiv["Married"].split()
         if indiv["ID"] == husb_id:
-            if indiv["Birthday"] > fam["Married"]:
+            if (int(full_mday[2]) < int(full_bday[2]) and
+           (months.index(full_mday[1])+1 < months.index(full_bday[1])+1 and 
+            int(full_mday[0]) < int(full_bday[0]))):
                 output += ("ERROR: INDIVIDUAL: US02:" + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
         if indiv["ID"] == wife_id:
-            if indiv["Birthday"] > fam["Married"]:
+            if (int(full_mday[2]) < int(full_bday[2]) and
+           (months.index(full_mday[1])+1 < months.index(full_bday[1])+1 and 
+            int(full_mday[0]) < int(full_bday[0]))):
                 output += ("ERROR: INDIVIDUAL: US02:" + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before birth, " + indiv["Birthday"] + "\n")
     
 # Daly Sprint 1
