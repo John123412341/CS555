@@ -214,11 +214,11 @@ for fam in fams:
         if indiv['ID'] == fam["Husband ID"]:
             if indiv['Death'] != "N/A":
                 if dt.strptime(indiv['Death'], '%d %b %Y') < dt.strptime(fam['Married'], '%d %b %Y'):
-                    output += ("ERROR: INDIVIDUAL: US05" + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")
+                    output += ("ERROR: INDIVIDUAL: US05: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")
         if indiv['ID'] == fam["Wife ID"]:
             if indiv['Death'] != "N/A":
                 if dt.strptime(indiv['Death'], '%d %b %Y') < dt.strptime(fam['Married'], '%d %b %Y'):
-                    output += ("ERROR: INDIVIDUAL: US05" + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")   
+                    output += ("ERROR: INDIVIDUAL: US05: " + indiv["ID"] + ": Marriage date, " + fam["Married"] + " occurs before death, " + indiv["Death"] + "\n")   
                     
 # Check if marriage is before divorce
 for fam in fams:
