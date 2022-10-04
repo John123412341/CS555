@@ -231,7 +231,7 @@ for fam in fams:
 # Check if all ages are less than 150 years old
 for indiv in indivs:
   if indiv["Age"] >= 150:
-    output += ("ERROR: INDIVIDUAL: US07: " + indiv["ID"] + ": Age, " + indiv["Age"] + " is not less than 150 years old\n")
+    output += ("ERROR: INDIVIDUAL: US07: " + indiv["ID"] + ": Age, " + str(indiv["Age"]) + " is not less than 150 years old\n")
 
 # Check if all dates are before current date
 full_today = datetime.datetime.now()
@@ -270,3 +270,4 @@ for fam in fams:
 output_filename = "output.txt"
 with open(output_filename, 'w') as fp:
     fp.write(output)
+
