@@ -267,6 +267,32 @@ for fam in fams:
       output += ("ERROR: FAMILY: US01: " + fam["ID"] + ": Divorce date, " + fam["Divorced"] + " is after the current date\n")
 
 
+# Maris Sprint 2
+
+# Check if multiple births are <5
+for fam in fams:
+    birthdays = []
+    for indiv in indivs:
+        if indiv['ID'] in fam['Children']:
+            birthdays.append(indiv['Birthday'])
+    childrenAtOnce = []
+    for birthday in birthdays:
+        childrenAtOnce.append(birthdays.count(birthday))
+    for i in childrenAtOnce:
+        if i >= 5:
+            output += ("ERROR: FAMILY: US14: " + fam["ID"] + ": Multiple Births >= 5 \n")
+        break
+
+# Check if families have fewer than 15 siblings
+for fam in fams:
+    numChildren = 0
+    for child in fam['Children']:
+        numChildren += 1
+    if numChildren > 14:
+        output += ("ERROR: FAMILY: US15: " + fam["ID"] + ": Number of siblings Not fewer than 15 \n")
+    
+    
+    
 # Anton Sprint 2
 
 # Check if all marriages occur at least 14 years after birth of both spouses
