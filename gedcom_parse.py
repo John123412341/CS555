@@ -266,6 +266,21 @@ for fam in fams:
           (full_today.month == months.index(divorced_date[1])+1 and full_today.day < int(divorced_date[0]))))):
       output += ("ERROR: FAMILY: US01: " + fam["ID"] + ": Divorce date, " + fam["Divorced"] + " is after the current date\n")
 
+#Giovanni Sprint 2
+# check if birth is before marriage of parents
+for fam in fams:
+    husb_id = fam["Husband ID"]
+    wife_id = fam["Wife ID"]
+    child_id = fam["Children"]
+    for indiv in indivs:
+        if indiv["ID"] in child_id:
+            full_child_bday = indiv["Birthday"].split()
+            full_mday = fam["Married"].split()
+            if (int(full_mday[2]) > int(full_child_bday[2]) and
+           (months.index(full_mday[1])+1 > months.index(full_child_bday[1])+1 and 
+            int(full_mday[0]) > int(full_child_bday[0]))):
+                output += ("ERROR: INDIVIDUAL: US08: " + indiv["ID"] + ": Parents marriage date, " + fam["Married"] + " occurs after birth of child, " + indiv["Birthday"] + "\n")
+            
 
 # Maris Sprint 2
 
