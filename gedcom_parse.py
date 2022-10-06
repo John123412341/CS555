@@ -281,7 +281,32 @@ for fam in fams:
             int(full_mday[0]) > int(full_child_bday[0]))):
                 output += ("ERROR: INDIVIDUAL: US08: " + indiv["ID"] + ": Parents marriage date, " + fam["Married"] + " occurs after birth of child, " + indiv["Birthday"] + "\n")
             
-
+#check if birth is after death of parents
+for fam in fams:
+    husb_id = fam["Husband ID"]
+    wife_id = fam["Wife ID"]
+    child_id = fam["Children"]
+    child_bdays = []
+    dad_dday = []
+    wife_dday = []
+    for indiv in indivs:
+        if indiv["ID"] in child_id:
+            child_bdays += indiv["Birthday"].split()
+        if husb_id == indiv["ID"]:
+            dad_dday += indiv["DEATH"].split()
+        if wife_id == indiv["ID"]:
+            wife_dday += indiv["DEATH"].split()
+    for child_bday in child_bdays:
+        if (int(dad_dday[2]) < int(child_bday[2]) and
+        (months.index(dad_dday[1])+1 < months.index(child_bday[1])+1 and 
+        int(dad_dday[0]) < int(child_bday[0]))):
+            output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Fathers Death date, " + dad_dday + " occurs before birth of child, " + child_bdays + "\n")
+        if (int(wife_dday[2]) < int(child_bday[2]) and
+        (months.index(wife_dday[1])+1 < months.index(child_bday[1])+1 and 
+        int(wife_dday[0]) < int(child_bday[0]))):
+            output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Mothers Death date, " + wife_dday + " occurs before birth of child, " + child_bdays + "\n")
+            
+            
 # Maris Sprint 2
 
 # Check if multiple births are <5
