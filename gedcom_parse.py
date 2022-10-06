@@ -349,6 +349,41 @@ for fam in fams:
             (months.index(full_bday[1])+1 == months.index(married_date[1])+1 and int(full_bday[0]) > int(married_date[0]))))):
         output += ("ERROR: FAMILY: US10: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " not at least 14 years after birth of both spouses\n")
 
+# Check that no marriage should occur during marriage to another
+for fam in fams:
+  married_date = fam["Married"].split()
+  husb_id = fam["Husband ID"]
+  wife_id = fam["Wife ID"]
+  divorce_date = "N/A"
+  if fam["Divorced"] == "N/A":
+    for indiv in indivs:
+      if ((indiv["ID"] == husb_id or indiv["ID"] == wife_id) and
+          indiv["Death"] != "N/A"):
+        if divorce_date == "N/A":
+          divorce_date = indiv["Death"].split()
+        elif (int(indiv["Death"].split()[2]) < int(divorce_date[2]) or
+              (int(indiv["Death"].split()[2]) == int(divorce_date[2]) and 
+               (months.index(indiv["Death"].split()[1])+1 < months.index(divorce_date[1])+1 or 
+                (months.index(indiv["Death"].split()[1])+1 == months.index(divorce_date[1])+1 and int(indiv["Death"].split()[0]) < int(divorce_date[0]))))):
+            divorce_date = indiv["Death"].split()
+    if divorce_date == "N/A":
+      divorce_date = [full_today.day, months[full_today.month-1], full_today.year]
+  else:
+    divorce_date = fam["Divorced"].split()
+  for other_fam in fams:
+    if other_fam["ID"] != fam["ID"] and (husb_id == other_fam["Husband ID"] or wife_id == other_fam["Wife ID"]):
+      other_married_date = other_fam["Married"].split()
+      if ((int(married_date[2]) < int(other_married_date[2]) or
+           (int(married_date[2]) == int(other_married_date[2]) and 
+            (months.index(married_date[1])+1 < months.index(other_married_date[1])+1 or 
+             (months.index(married_date[1])+1 == months.index(other_married_date[1])+1 and int(married_date[0]) < int(other_married_date[0]))))) and
+          (int(other_married_date[2]) < int(divorce_date[2]) or
+           (int(other_married_date[2]) == int(divorce_date[2]) and 
+            (months.index(other_married_date[1])+1 < months.index(divorce_date[1])+1 or 
+             (months.index(other_married_date[1])+1 == months.index(divorce_date[1])+1 and int(other_married_date[0]) < int(divorce_date[0])))))):
+        output += ("ERROR: FAMILY: US11: " + other_fam["ID"] + ": Marriage date, " + other_fam["Married"] + " occurs within marriage of " + fam["ID"] + "\n")
+  
+
 # Open output file
 output_filename = "output.txt"
 with open(output_filename, 'w') as fp:
