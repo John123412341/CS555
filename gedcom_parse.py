@@ -266,6 +266,23 @@ for fam in fams:
           (full_today.month == months.index(divorced_date[1])+1 and full_today.day < int(divorced_date[0]))))):
       output += ("ERROR: FAMILY: US01: " + fam["ID"] + ": Divorce date, " + fam["Divorced"] + " is after the current date\n")
 
+
+# Anton Sprint 2
+
+# Check if all marriages occur at least 14 years after birth of both spouses
+for fam in fams:
+  married_date = fam["Married"].split()
+  husb_id = fam["Husband ID"]
+  wife_id = fam["Wife ID"]
+  for indiv in indivs:
+    if indiv["ID"] == husb_id or indiv["ID"] == wife_id:
+      full_bday = indiv["Birthday"].split()
+      if (int(full_bday[2])+14 > int(married_date[2]) or
+          (int(full_bday[2])+14 == int(married_date[2]) and 
+           (months.index(full_bday[1])+1 > months.index(married_date[1])+1 or 
+            (months.index(full_bday[1])+1 == months.index(married_date[1])+1 and int(full_bday[0]) > int(married_date[0]))))):
+        output += ("ERROR: FAMILY: US10: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " not at least 14 years after birth of both spouses\n")
+
 # Open output file
 output_filename = "output.txt"
 with open(output_filename, 'w') as fp:
