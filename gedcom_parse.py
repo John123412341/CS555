@@ -293,7 +293,7 @@ for fam in fams:
     wife_dday = []
     for indiv in indivs:
         if indiv["ID"] in child_id:
-            child_bdays += indiv["Birthday"].split()
+            child_bdays.append(indiv["Birthday"].split())
         if husb_id == indiv["ID"]:
             dad_dday = indiv["Death"].split()
         if wife_id == indiv["ID"]:

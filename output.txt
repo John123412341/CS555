@@ -2,7 +2,7 @@ Individuals
 +-------+----------------------+--------+-------------+-----+-------+-------------+----------+------------------+
 |   ID  |         Name         | Gender |   Birthday  | Age | Alive |    Death    |  Child   |      Spouse      |
 +-------+----------------------+--------+-------------+-----+-------+-------------+----------+------------------+
-|  @I1@ |     Maris /Daly/     |   F    | 10 OCT 2001 |  20 |  True |     N/A     | ['@F1@'] |       N/A        |
+|  @I1@ |     Maris /Daly/     |   F    | 10 OCT 2001 |  21 |  True |     N/A     | ['@F1@'] |       N/A        |
 |  @I2@ |     John /Daly/      |   M    | 29 APR 1967 |  55 |  True |     N/A     | ['@F2@'] |     ['@F1@']     |
 |  @I3@ |   Susan /Dominick/   |   F    |  9 JAN 1968 |  54 |  True |     N/A     | ['@F3@'] |     ['@F1@']     |
 |  @I4@ |  Anthony /Dominick/  |   M    | 16 AUG 1930 |  59 | False | 28 MAY 1990 |   N/A    |     ['@F3@']     |
@@ -20,12 +20,12 @@ Individuals
 | @I16@ |    David /Smith/     |   M    |  9 DEC 1960 |  32 | False | 13 NOV 1993 |   N/A    |     ['@F6@']     |
 | @I17@ |   Mike /Sapricone/   |   M    |  7 NOV 1950 |  71 |  True |     N/A     |   N/A    |     ['@F5@']     |
 | @I18@ |   Jessica /Smith/    |   F    | 10 SEP 1992 |  30 |  True |     N/A     | ['@F6@'] |       N/A        |
-| @I19@ | Victoria /Sapricone/ |   F    |  8 OCT 1997 |  24 |  True |     N/A     | ['@F5@'] |       N/A        |
-| @I20@ |  Ashley /Sapricone/  |   F    |  8 OCT 1997 |  24 |  True |     N/A     | ['@F5@'] |       N/A        |
+| @I19@ | Victoria /Sapricone/ |   F    |  8 OCT 1997 |  25 |  True |     N/A     | ['@F5@'] |       N/A        |
+| @I20@ |  Ashley /Sapricone/  |   F    |  8 OCT 1997 |  25 |  True |     N/A     | ['@F5@'] |       N/A        |
 | @I21@ |  Jeffrey /Dominick/  |   M    |  1 JAN 1965 |  57 |  True |     N/A     | ['@F3@'] |     ['@F7@']     |
 | @I22@ |   Amy /Stepnowski/   |   F    |  5 JUN 1967 |  55 |  True |     N/A     |   N/A    |     ['@F7@']     |
 | @I23@ |    JJ /Dominick/     |   M    | 11 AUG 2000 |  22 |  True |     N/A     | ['@F7@'] |       N/A        |
-| @I24@ |   Cara /Dominick/    |   F    |  7 OCT 2002 |  19 |  True |     N/A     | ['@F7@'] |       N/A        |
+| @I24@ |   Cara /Dominick/    |   F    |  7 OCT 2002 |  20 |  True |     N/A     | ['@F7@'] |       N/A        |
 | @I25@ |   Lance /Dominick/   |   M    | 13 SEP 2004 |  18 |  True |     N/A     | ['@F7@'] |       N/A        |
 +-------+----------------------+--------+-------------+-----+-------+-------------+----------+------------------+
 Families 
@@ -40,3 +40,4 @@ Families
 | @F6@ |  3 JUN 1987 |   N/A    |   @I16@    |   David /Smith/    |   @I9@  |  Eileen /Daly/   |             ['@I18@']             |
 | @F7@ |  7 APR 1990 |   N/A    |   @I21@    | Jeffrey /Dominick/ |  @I22@  | Amy /Stepnowski/ |    ['@I23@', '@I24@', '@I25@']    |
 +------+-------------+----------+------------+--------------------+---------+------------------+-----------------------------------+ 
+ERROR: FAMILY: US10: @F2@: Marriage date, 2 JUL 1955 not at least 14 years after birth of both spouses
