@@ -300,7 +300,7 @@ for fam in fams:
             wife_dday = indiv["Death"].split()
     for child_bday in child_bdays:
       if (len(dad_dday) != 1 and
-        int(dad_dday[0][2]) < int(child_bday[2]) and
+        int(dad_dday[2]) < int(child_bday[2]) and
         (months.index(dad_dday[1])+1 < months.index(child_bday[1])+1 and 
         int(dad_dday[0]) < int(child_bday[0]))):
         output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Fathers Death date, " + dad_dday + " occurs before birth of child, " + child_bdays + "\n")
