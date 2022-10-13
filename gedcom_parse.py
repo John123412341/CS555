@@ -438,18 +438,35 @@ class testUserStory(unittest.TestCase):
               testValue = False
         self.assertTrue(testValue, message)
         
-    # check if birthday exists for all individuals
-    def test_birthdayUS14(self):
-        for indiv in indivs:
-            x = indiv['Birthday']
-            self.assertIsNotNone(x)
+    # check if multiple births >5
+    def test_trueUS14(self):
+        message = "Multiples births should not have more than five children"
+        testValue = True
+        for fam in fams:
+            birthdays = []
+            for indiv in indivs:
+                if indiv['ID'] in fam['Children']:
+                    birthdays.append(indiv['Birthday'])
+                childrenAtOnce = []
+        for birthday in birthdays:
+            childrenAtOnce.append(birthdays.count(birthday))
+        for i in childrenAtOnce:
+            if i >= 5:
+                testValue = False
+            break
+        self.assertTrue(testValue, message)
             
     # check if count for number of children exists
-    def test_childrenUS15(self):
-        x = 0
-        for child in fam['Children']:
-            x += 1
-            self.assertIsNotNone(x)  
+    def test_trueUS15(self):
+        message = "Families should not have more than fifteen children"
+        testValue = True
+        for fam in fams:
+            numChildren = 0
+            for child in fam['Children']:
+                numChildren += 1
+            if numChildren > 14:
+                testValue = False 
+        self.assertTrue(testValue, message) # check if multiple births >5 
 
     # Check if all marriages occur at least 14 years after birth of both spouses
     def test_trueUS10(self):
