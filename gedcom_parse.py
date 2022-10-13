@@ -454,3 +454,5 @@ output_filename = "output.txt"
 with open(output_filename, 'w') as fp:
     fp.write(output)
 
+if __name__ == '__main__':
+  unittest.main()
