@@ -322,7 +322,7 @@ for fam in fams:
     for birthday in birthdays:
         x = birthdays.count(birthday)
         if x >= 5:
-            print(("ERROR: FAMILY: US14: " + fam["ID"] + ": Multiple Births >= 5 \n"))
+            output += ("ERROR: FAMILY: US14: " + fam["ID"] + ": Multiple Births >= 5 \n")
             break
 
 # Check if families have fewer than 15 siblings

@@ -29,6 +29,7 @@ Families
 | @F2@ | 7 SEP 1987 |   N/A    |   @I11@    | Chester /Arthur/ |   @I2@  | Susan /Sand/ |                                                               N/A                                                                |
 +------+------------+----------+------------+------------------+---------+--------------+----------------------------------------------------------------------------------------------------------------------------------+ 
 ERROR: INDIVIDUAL: US08: @I1@: Parents marriage date, 7 NOV 1985 occurs after birth of child, 4 AUG 1980
+ERROR: FAMILY: US14: @F1@: Multiple Births >= 5 
 ERROR: FAMILY: US15: @F1@: Number of siblings Not fewer than 15 
 ERROR: FAMILY: US10: @F1@: Marriage date, 7 NOV 1985 not at least 14 years after birth of both spouses
 ERROR: FAMILY: US11: @F2@: Marriage date, 7 SEP 1987 occurs within marriage of @F1@
