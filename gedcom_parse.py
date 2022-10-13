@@ -406,33 +406,36 @@ class testUserStory(unittest.TestCase):
                 int(full_mday[0]) > int(full_child_bday[0]))):
                     testValue = False
         self.assertTrue(testValue, message) 
+        
     #check if birth is after death of parents 
-    def test_true(self): 
+    def test_true(self):
+        message = "Birth must be before the death of parents"
+        testValue = True
         for fam in fams:
-            husb_id = fam["Husband ID"]
-            wife_id = fam["Wife ID"]
-            child_id = fam["Children"]
-            child_bdays = []
-            dad_dday = []
-            wife_dday = []
-            for indiv in indivs:
-                message = "Birth must be before the death of parents"
-                testValue = True
-                if indiv["ID"] in child_id:
-                    child_bdays += indiv["Birthday"].split()
-                if husb_id == indiv["ID"]:
-                    dad_dday += indiv["DEATH"].split()
-                if wife_id == indiv["ID"]:
-                    wife_dday += indiv["DEATH"].split()
-            for child_bday in child_bdays:
-                if (int(dad_dday[2]) < int(child_bday[2]) and
-                (months.index(dad_dday[1])+1 < months.index(child_bday[1])+1 and 
-                int(dad_dday[0]) < int(child_bday[0]))):
-                    testValue = False
-                if (int(wife_dday[2]) < int(child_bday[2]) and
-                (months.index(wife_dday[1])+1 < months.index(child_bday[1])+1 and 
-                int(wife_dday[0]) < int(child_bday[0]))):
-                    testValue = False
+          husb_id = fam["Husband ID"]
+          wife_id = fam["Wife ID"]
+          child_id = fam["Children"]
+          child_bdays = []
+          dad_dday = []
+          wife_dday = []
+          for indiv in indivs:
+              if indiv["ID"] in child_id:
+                  child_bdays.append(indiv["Birthday"].split())
+              if husb_id == indiv["ID"]:
+                  dad_dday = indiv["Death"].split()
+              if wife_id == indiv["ID"]:
+                  wife_dday = indiv["Death"].split()
+          for child_bday in child_bdays:
+            if (len(dad_dday) != 1 and
+              int(dad_dday[2]) < int(child_bday[2]) and
+              (months.index(dad_dday[1])+1 < months.index(child_bday[1])+1 and 
+              int(dad_dday[0]) < int(child_bday[0]))):
+              testValue = False
+            if (len(wife_dday) != 1 and
+              int(wife_dday[2]) < int(child_bday[2]) and
+              (months.index(wife_dday[1])+1 < months.index(child_bday[1])+1 and 
+              int(wife_dday[0]) < int(child_bday[0]))):
+              testValue = False
         self.assertTrue(testValue, message)
         
     # check if birthday exists for all individuals
