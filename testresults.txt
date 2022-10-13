@@ -1,20 +1,34 @@
 Individuals
-+------+----------------+--------+------------+-----+-------+------------+-------+----------+
-|  ID  |      Name      | Gender |  Birthday  | Age | Alive |   Death    | Child |  Spouse  |
-+------+----------------+--------+------------+-----+-------+------------+-------+----------+
-| @I1@ | Bill Bob /Bob/ |   M    | 2 FEB 1775 | 249 | False | 1 FEB 2025 |  N/A  | ['@F1@'] |
-| @I2@ |   Jane /Bob/   |   F    | 2 MAY 2000 | -41 | False | 1 FEB 1960 |  N/A  | ['@F1@'] |
-+------+----------------+--------+------------+-----+-------+------------+-------+----------+
++-------+------------------+--------+-------------+-----+-------+------------+----------+------------------+
+|   ID  |       Name       | Gender |   Birthday  | Age | Alive |   Death    |  Child   |      Spouse      |
++-------+------------------+--------+-------------+-----+-------+------------+----------+------------------+
+|  @I1@ |   Joe /Smith/    |   M    |  4 AUG 1980 |  42 |  True |    N/A     | ['@F1@'] |       N/A        |
+|  @I2@ |   Susan /Sand/   |   F    | 10 SEP 1952 |  37 | False | 7 MAR 1990 |   N/A    | ['@F1@', '@F2@'] |
+|  @I3@ |  George /Smith/  |   M    | 12 SEP 1973 |  17 | False | 6 OCT 1990 |   N/A    |     ['@F1@']     |
+|  @I4@ |  Susie /Smtih/   |   F    |  5 AUG 1991 |  31 |  True |    N/A     | ['@F1@'] |       N/A        |
+|  @I5@ |  Annie /Smtih/   |   F    | 12 NOV 1986 |  35 |  True |    N/A     | ['@F1@'] |       N/A        |
+|  @I6@ |  Bettie /Smtih/  |   F    | 12 NOV 1986 |  35 |  True |    N/A     | ['@F1@'] |       N/A        |
+|  @I7@ |   Carl /Smtih/   |   M    | 12 NOV 1986 |  35 |  True |    N/A     | ['@F1@'] |       N/A        |
+|  @I8@ |  Declan /Smtih/  |   M    | 12 NOV 1986 |  35 |  True |    N/A     | ['@F1@'] |       N/A        |
+|  @I9@ |  Ester /Smtih/   |   F    | 12 NOV 1986 |  35 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I10@ |  Frank /Smtih/   |   M    | 12 NOV 1986 |  35 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I11@ | Chester /Arthur/ |   M    |  6 OCT 1952 |  70 |  True |    N/A     |   N/A    |     ['@F2@']     |
+| @I12@ |  Gerry /Smith/   |   M    |  5 DEC 1987 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I13@ |  Harry /Smith/   |   M    |  5 DEC 1987 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I14@ |   Izzy /Smith/   |   F    |  5 DEC 1987 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I15@ |  Jimmy /Smith/   |   M    |  5 DEC 1987 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I16@ |  Kimmy /Smith/   |   F    |  1 OCT 1988 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I17@ |  Lauren /Smith/  |   F    |  1 JAN 1988 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I18@ |  Maeve /Smith/   |   F    |  1 OCT 1988 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
++-------+------------------+--------+-------------+-----+-------+------------+----------+------------------+
 Families 
-+------+------------+------------+------------+----------------+---------+------------+----------+
-|  ID  |  Married   |  Divorced  | Husband ID |  Husband Name  | Wife ID | Wife Name  | Children |
-+------+------------+------------+------------+----------------+---------+------------+----------+
-| @F1@ | 2 FEB 2040 | 2 FEB 1995 |    @I1@    | Bill Bob /Bob/ |   @I2@  | Jane /Bob/ |   N/A    |
-+------+------------+------------+------------+----------------+---------+------------+----------+ 
-ERROR: INDIVIDUAL: US03: @I2@: Death, 1 FEB 1960 occurs before birth, 2 MAY 2000.
-ERROR: INDIVIDUAL: US05: @I1@: Marriage date, 2 FEB 2040 occurs before death, 1 FEB 2025
-ERROR: INDIVIDUAL: US05: @I2@: Marriage date, 2 FEB 2040 occurs before death, 1 FEB 1960
-ERROR: FAMILY: US04: @F1@: Marriage date, 2 FEB 2040 occurs after divorce, 2 FEB 1995
-ERROR: INDIVIDUAL: US07: @I1@: Age, 249 is not less than 150 years old
-ERROR: INDIVIDUAL: US01: @I1@: Death date, 1 FEB 2025 is after the current date
-ERROR: FAMILY: US01: @F1@: Marriage date, 2 FEB 2040 is after the current date
++------+------------+----------+------------+------------------+---------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+|  ID  |  Married   | Divorced | Husband ID |   Husband Name   | Wife ID |  Wife Name   |                                                             Children                                                             |
++------+------------+----------+------------+------------------+---------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
+| @F1@ | 7 NOV 1985 |   N/A    |    @I3@    |  George /Smith/  |   @I2@  | Susan /Sand/ | ['@I1@', '@I4@', '@I5@', '@I6@', '@I7@', '@I8@', '@I9@', '@I10@', '@I12@', '@I13@', '@I14@', '@I15@', '@I16@', '@I17@', '@I18@'] |
+| @F2@ | 7 SEP 1987 |   N/A    |   @I11@    | Chester /Arthur/ |   @I2@  | Susan /Sand/ |                                                               N/A                                                                |
++------+------------+----------+------------+------------------+---------+--------------+----------------------------------------------------------------------------------------------------------------------------------+ 
+ERROR: INDIVIDUAL: US08: @I1@: Parents marriage date, 7 NOV 1985 occurs after birth of child, 4 AUG 1980
+ERROR: FAMILY: US15: @F1@: Number of siblings Not fewer than 15 
+ERROR: FAMILY: US10: @F1@: Marriage date, 7 NOV 1985 not at least 14 years after birth of both spouses
+ERROR: FAMILY: US11: @F2@: Marriage date, 7 SEP 1987 occurs within marriage of @F1@
