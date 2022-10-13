@@ -319,13 +319,11 @@ for fam in fams:
     for indiv in indivs:
         if indiv['ID'] in fam['Children']:
             birthdays.append(indiv['Birthday'])
-    childrenAtOnce = []
     for birthday in birthdays:
-        childrenAtOnce.append(birthdays.count(birthday))
-    for i in childrenAtOnce:
-        if i >= 5:
-            output += ("ERROR: FAMILY: US14: " + fam["ID"] + ": Multiple Births >= 5 \n")
-        break
+        x = birthdays.count(birthday)
+        if x >= 5:
+            print(("ERROR: FAMILY: US14: " + fam["ID"] + ": Multiple Births >= 5 \n"))
+            break
 
 # Check if families have fewer than 15 siblings
 for fam in fams:
@@ -447,13 +445,11 @@ class testUserStory(unittest.TestCase):
             for indiv in indivs:
                 if indiv['ID'] in fam['Children']:
                     birthdays.append(indiv['Birthday'])
-                childrenAtOnce = []
-        for birthday in birthdays:
-            childrenAtOnce.append(birthdays.count(birthday))
-        for i in childrenAtOnce:
-            if i >= 5:
-                testValue = False
-            break
+            for birthday in birthdays:
+                x = birthdays.count(birthday)
+                if x >= 5:
+                    testValue = False
+                    break
         self.assertTrue(testValue, message)
             
     # check if count for number of children exists
