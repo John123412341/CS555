@@ -1,3 +1,4 @@
+import unittest
 import datetime
 from datetime import datetime as dt
 from prettytable import PrettyTable
@@ -382,7 +383,54 @@ for fam in fams:
             (months.index(other_married_date[1])+1 < months.index(divorce_date[1])+1 or 
              (months.index(other_married_date[1])+1 == months.index(divorce_date[1])+1 and int(other_married_date[0]) < int(divorce_date[0])))))):
         output += ("ERROR: FAMILY: US11: " + other_fam["ID"] + ": Marriage date, " + other_fam["Married"] + " occurs within marriage of " + fam["ID"] + "\n")
-  
+        
+        
+class testUserStory(unittest.TestCase):
+    # check if birth is before marriage of parents
+    def test_true(self): 
+        for fam in fams:
+        husb_id = fam["Husband ID"]
+        wife_id = fam["Wife ID"]
+        child_id = fam["Children"]
+        for indiv in indivs:
+            message = "Marriage of parents must be before birth of child!"
+            testValue = True
+            if indiv["ID"] in child_id:
+                full_child_bday = indiv["Birthday"].split()
+                full_mday = fam["Married"].split()
+                if (int(full_mday[2]) > int(full_child_bday[2]) and
+               (months.index(full_mday[1])+1 > months.index(full_child_bday[1])+1 and 
+                int(full_mday[0]) > int(full_child_bday[0]))):
+                    testValue = False
+        self.assertTrue(testValue, message) 
+    #check if birth is after death of parents 
+    def test_true(self): 
+        for fam in fams:
+            husb_id = fam["Husband ID"]
+            wife_id = fam["Wife ID"]
+            child_id = fam["Children"]
+            child_bdays = []
+            dad_dday = []
+            wife_dday = []
+            for indiv in indivs:
+                message = "Birth must be before the death of parents"
+                testValue = True
+                if indiv["ID"] in child_id:
+                    child_bdays += indiv["Birthday"].split()
+                if husb_id == indiv["ID"]:
+                    dad_dday += indiv["DEATH"].split()
+                if wife_id == indiv["ID"]:
+                    wife_dday += indiv["DEATH"].split()
+            for child_bday in child_bdays:
+                if (int(dad_dday[2]) < int(child_bday[2]) and
+                (months.index(dad_dday[1])+1 < months.index(child_bday[1])+1 and 
+                int(dad_dday[0]) < int(child_bday[0]))):
+                    testValue = False
+                if (int(wife_dday[2]) < int(child_bday[2]) and
+                (months.index(wife_dday[1])+1 < months.index(child_bday[1])+1 and 
+                int(wife_dday[0]) < int(child_bday[0]))):
+                    testValue = False
+        self.assertTrue(testValue, message)                
 
 # Open output file
 output_filename = "output.txt"
