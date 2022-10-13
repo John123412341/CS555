@@ -433,7 +433,21 @@ class testUserStory(unittest.TestCase):
                 (months.index(wife_dday[1])+1 < months.index(child_bday[1])+1 and 
                 int(wife_dday[0]) < int(child_bday[0]))):
                     testValue = False
-        self.assertTrue(testValue, message)                
+        self.assertTrue(testValue, message)
+        
+    # check if birthday exists for all individuals
+    def test_birthdayUS14(self):
+        for indiv in indivs:
+            x = indiv['Birthday']
+            self.assertIsNotNone(x)
+            
+    # check if count for number of children exists
+    def test_childrenUS15(self):
+        x = 0
+        for child in fam['Children']:
+            x += 1
+            self.assertIsNotNone(x)    
+  
 
 # Open output file
 output_filename = "output.txt"
