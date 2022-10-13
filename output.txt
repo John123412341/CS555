@@ -33,11 +33,10 @@ Families
 |  ID  |   Married   | Divorced | Husband ID |    Husband Name    | Wife ID |    Wife Name     |              Children             |
 +------+-------------+----------+------------+--------------------+---------+------------------+-----------------------------------+
 | @F1@ | 31 OCT 1993 |   N/A    |    @I2@    |    John /Daly/     |   @I3@  | Susan /Dominick/ |         ['@I1@', '@I10@']         |
-| @F2@ |  2 JUL 1955 |   N/A    |    @I6@    |    John /Daly/     |   @I7@  | Eileen /Johnson/ | ['@I2@', '@I8@', '@I9@', '@I11@'] |
+| @F2@ |  2 JUL 1965 |   N/A    |    @I6@    |    John /Daly/     |   @I7@  | Eileen /Johnson/ | ['@I2@', '@I8@', '@I9@', '@I11@'] |
 | @F3@ |  4 OCT 1953 |   N/A    |    @I4@    | Anthony /Dominick/ |   @I5@  |  Demaris /Lane/  |         ['@I3@', '@I21@']         |
 | @F4@ | 27 FEB 1991 |   N/A    |    @I8@    |   Patrick /Daly/   |  @I12@  |  Jeanne /Daly/   |    ['@I13@', '@I14@', '@I15@']    |
 | @F5@ |  7 MAR 1995 |   N/A    |   @I17@    |  Mike /Sapricone/  |   @I9@  |  Eileen /Daly/   |         ['@I19@', '@I20@']        |
 | @F6@ |  3 JUN 1987 |   N/A    |   @I16@    |   David /Smith/    |   @I9@  |  Eileen /Daly/   |             ['@I18@']             |
 | @F7@ |  7 APR 1990 |   N/A    |   @I21@    | Jeffrey /Dominick/ |  @I22@  | Amy /Stepnowski/ |    ['@I23@', '@I24@', '@I25@']    |
 +------+-------------+----------+------------+--------------------+---------+------------------+-----------------------------------+ 
-ERROR: FAMILY: US10: @F2@: Marriage date, 2 JUL 1955 not at least 14 years after birth of both spouses
