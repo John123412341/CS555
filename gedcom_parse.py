@@ -268,6 +268,7 @@ for fam in fams:
       output += ("ERROR: FAMILY: US01: " + fam["ID"] + ": Divorce date, " + fam["Divorced"] + " is after the current date\n")
 
 #Giovanni Sprint 2
+
 # check if birth is before marriage of parents
 for fam in fams:
     husb_id = fam["Husband ID"]
@@ -294,18 +295,18 @@ for fam in fams:
         if indiv["ID"] in child_id:
             child_bdays += indiv["Birthday"].split()
         if husb_id == indiv["ID"]:
-            dad_dday += indiv["DEATH"].split()
+            dad_dday += indiv["Death"].split()
         if wife_id == indiv["ID"]:
-            wife_dday += indiv["DEATH"].split()
+            wife_dday += indiv["Death"].split()
     for child_bday in child_bdays:
-        if (int(dad_dday[2]) < int(child_bday[2]) and
+      if (int(dad_dday[2]) < int(child_bday[2]) and
         (months.index(dad_dday[1])+1 < months.index(child_bday[1])+1 and 
         int(dad_dday[0]) < int(child_bday[0]))):
-            output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Fathers Death date, " + dad_dday + " occurs before birth of child, " + child_bdays + "\n")
-        if (int(wife_dday[2]) < int(child_bday[2]) and
+        output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Fathers Death date, " + dad_dday + " occurs before birth of child, " + child_bdays + "\n")
+      if (int(wife_dday[2]) < int(child_bday[2]) and
         (months.index(wife_dday[1])+1 < months.index(child_bday[1])+1 and 
         int(wife_dday[0]) < int(child_bday[0]))):
-            output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Mothers Death date, " + wife_dday + " occurs before birth of child, " + child_bdays + "\n")
+        output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Mothers Death date, " + wife_dday + " occurs before birth of child, " + child_bdays + "\n")
             
             
 # Maris Sprint 2
@@ -388,7 +389,7 @@ for fam in fams:
 class testUserStory(unittest.TestCase):
     # check if birth is before marriage of parents
     def test_true(self): 
-        for fam in fams:
+      for fam in fams:
         husb_id = fam["Husband ID"]
         wife_id = fam["Wife ID"]
         child_id = fam["Children"]
