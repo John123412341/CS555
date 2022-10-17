@@ -306,16 +306,12 @@ for fam in fams:
             wife_dday = indiv["Death"].split()
     for child_bday in child_bdays:
       if (len(dad_dday) != 1 and
-        int(dad_dday[2]) < int(child_bday[2]) and
-        (months.index(dad_dday[1])+1 < months.index(child_bday[1])+1 and 
-        int(dad_dday[0]) < int(child_bday[0]))):
-        output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Fathers Death date, " + dad_dday + " occurs before birth of child, " + child_bdays + "\n")
+        earlierDate(dad_dday,child_bday)):
+        output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Fathers Death date, " + str(dad_dday) + " occurs before birth of child, " + str(child_bday) + "\n")
       if (len(wife_dday) != 1 and
-        int(wife_dday[2]) < int(child_bday[2]) and
-        (months.index(wife_dday[1])+1 < months.index(child_bday[1])+1 and 
-        int(wife_dday[0]) < int(child_bday[0]))):
-        output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Mothers Death date, " + wife_dday + " occurs before birth of child, " + child_bdays + "\n")
-            
+        earlierDate(wife_dday,child_bday)):
+        output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Mothers Death date, " + str(wife_dday) + " occurs before birth of child, " + str(child_bday) + "\n")
+       
             
 # Maris Sprint 2
 
@@ -417,14 +413,10 @@ class testUserStory(unittest.TestCase):
                   wife_dday = indiv["Death"].split()
           for child_bday in child_bdays:
             if (len(dad_dday) != 1 and
-              int(dad_dday[2]) < int(child_bday[2]) and
-              (months.index(dad_dday[1])+1 < months.index(child_bday[1])+1 and 
-              int(dad_dday[0]) < int(child_bday[0]))):
+               earlierDate(dad_dday,child_bday)):
               testValue = False
             if (len(wife_dday) != 1 and
-              int(wife_dday[2]) < int(child_bday[2]) and
-              (months.index(wife_dday[1])+1 < months.index(child_bday[1])+1 and 
-              int(wife_dday[0]) < int(child_bday[0]))):
+               earlierDate(wife_dday,child_bday)):
               testValue = False
         self.assertTrue(testValue, message)
         
