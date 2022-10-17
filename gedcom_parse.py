@@ -3,6 +3,7 @@ import datetime
 from datetime import datetime as dt
 from prettytable import PrettyTable
 
+# Tags and other global data
 valid_tags = ["0 INDI", "1 NAME", "1 SEX", "1 BIRT", "1 DEAT", "1 FAMC", "1 FAMS", "0 FAM", "1 MARR", "1 HUSB", "1 WIFE", "1 CHIL", "1 DIV", "2 DATE", "0 HEAD", "0 TRLR", "0 NOTE"]
 indiv_tags = {"NAME":"Name", "SEX":"Gender", "BIRT":"Birthday", "DEAT":"Death", "FAMC":"Child", "FAMS":"Spouse"}
 fam_tags = {"MARR":"Married","DIV":"Divorced","HUSB":"Husband ID","WIFE":"Wife ID","CHIL":"Children"}
