@@ -230,6 +230,22 @@ for fam in fams:
 
 # Anton Sprint 1
 
+def earlierDate(date_a, date_b):
+  # Check if date_a is earlier than date_b
+  # Dates in format of [day, month, year]
+  if date_a[1] in months:
+    date_a[1] = months.index(date_a[1])+1
+  if date_b[1] in months:
+    date_b[1] = months.index(date_b[1])+1
+  for index in range(len(date_a)):
+    date_a[index] = int(date_a[index])
+  for index in range(len(date_b)):
+    date_b[index] = int(date_b[index])
+  return (date_b[2] > date_a[2] or
+          (date_b[2] == date_a[2] and 
+           (date_b[1] > date_a[1] or 
+            (date_b[1] == date_a[1] and date_b[0] > date_a[0]))))
+
 # Check if all ages are less than 150 years old
 for indiv in indivs:
   if indiv["Age"] >= 150:
@@ -237,35 +253,24 @@ for indiv in indivs:
 
 # Check if all dates are before current date
 full_today = datetime.datetime.now()
+full_today = [full_today.day, full_today.month, full_today.year]
 for indiv in indivs:
   full_bday = indiv["Birthday"].split()
-  if (full_today.year < int(full_bday[2]) or
-      (full_today.year == int(full_bday[2]) and 
-       (full_today.month < months.index(full_bday[1])+1 or 
-        (full_today.month == months.index(full_bday[1])+1 and full_today.day < int(full_bday[0]))))):
+  if earlierDate(full_today, full_bday):
     output += ("ERROR: INDIVIDUAL: US01: " + indiv["ID"] + ": Birthday, " + indiv["Birthday"] + " is after the current date\n")
   full_dday = indiv["Death"]
   if full_dday != "N/A":
     full_dday = full_dday.split()
-    if (full_today.year < int(full_dday[2]) or
-        (full_today.year == int(full_dday[2]) and 
-        (full_today.month < months.index(full_dday[1])+1 or 
-          (full_today.month == months.index(full_dday[1])+1 and full_today.day < int(full_dday[0]))))):
+    if earlierDate(full_today, full_dday):
       output += ("ERROR: INDIVIDUAL: US01: " + indiv["ID"] + ": Death date, " + indiv["Death"] + " is after the current date\n")
 for fam in fams:
   married_date = fam["Married"].split()
-  if (full_today.year < int(married_date[2]) or
-      (full_today.year == int(married_date[2]) and 
-       (full_today.month < months.index(married_date[1])+1 or 
-        (full_today.month == months.index(married_date[1])+1 and full_today.day < int(married_date[0]))))):
+  if earlierDate(full_today, married_date):
     output += ("ERROR: FAMILY: US01: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " is after the current date\n")
   divorced_date = fam["Divorced"]
   if divorced_date != "N/A":
     divorced_date = divorced_date.split()
-    if (full_today.year < int(divorced_date[2]) or
-        (full_today.year == int(divorced_date[2]) and 
-         (full_today.month < months.index(divorced_date[1])+1 or 
-          (full_today.month == months.index(divorced_date[1])+1 and full_today.day < int(divorced_date[0]))))):
+    if earlierDate(full_today, divorced_date):
       output += ("ERROR: FAMILY: US01: " + fam["ID"] + ": Divorce date, " + fam["Divorced"] + " is after the current date\n")
 
 #Giovanni Sprint 2
@@ -346,10 +351,8 @@ for fam in fams:
   for indiv in indivs:
     if indiv["ID"] == husb_id or indiv["ID"] == wife_id:
       full_bday = indiv["Birthday"].split()
-      if (int(full_bday[2])+14 > int(married_date[2]) or
-          (int(full_bday[2])+14 == int(married_date[2]) and 
-           (months.index(full_bday[1])+1 > months.index(married_date[1])+1 or 
-            (months.index(full_bday[1])+1 == months.index(married_date[1])+1 and int(full_bday[0]) > int(married_date[0]))))):
+      full_bday[2] = int(full_bday[2]) + 14
+      if earlierDate(married_date, full_bday):
         output += ("ERROR: FAMILY: US10: " + fam["ID"] + ": Marriage date, " + fam["Married"] + " not at least 14 years after birth of both spouses\n")
 
 # Check that no marriage should occur during marriage to another
@@ -362,30 +365,18 @@ for fam in fams:
     for indiv in indivs:
       if ((indiv["ID"] == husb_id or indiv["ID"] == wife_id) and
           indiv["Death"] != "N/A"):
-        if divorce_date == "N/A":
+        if divorce_date == "N/A" or earlierDate(indiv["Death"].split(),divorce_date):
           divorce_date = indiv["Death"].split()
-        elif (int(indiv["Death"].split()[2]) < int(divorce_date[2]) or
-              (int(indiv["Death"].split()[2]) == int(divorce_date[2]) and 
-               (months.index(indiv["Death"].split()[1])+1 < months.index(divorce_date[1])+1 or 
-                (months.index(indiv["Death"].split()[1])+1 == months.index(divorce_date[1])+1 and int(indiv["Death"].split()[0]) < int(divorce_date[0]))))):
-            divorce_date = indiv["Death"].split()
     if divorce_date == "N/A":
-      divorce_date = [full_today.day, months[full_today.month-1], full_today.year]
+      divorce_date = full_today
   else:
     divorce_date = fam["Divorced"].split()
   for other_fam in fams:
     if other_fam["ID"] != fam["ID"] and (husb_id == other_fam["Husband ID"] or wife_id == other_fam["Wife ID"]):
       other_married_date = other_fam["Married"].split()
-      if ((int(married_date[2]) < int(other_married_date[2]) or
-           (int(married_date[2]) == int(other_married_date[2]) and 
-            (months.index(married_date[1])+1 < months.index(other_married_date[1])+1 or 
-             (months.index(married_date[1])+1 == months.index(other_married_date[1])+1 and int(married_date[0]) < int(other_married_date[0]))))) and
-          (int(other_married_date[2]) < int(divorce_date[2]) or
-           (int(other_married_date[2]) == int(divorce_date[2]) and 
-            (months.index(other_married_date[1])+1 < months.index(divorce_date[1])+1 or 
-             (months.index(other_married_date[1])+1 == months.index(divorce_date[1])+1 and int(other_married_date[0]) < int(divorce_date[0])))))):
+      if earlierDate(married_date,other_married_date) and earlierDate(other_married_date,divorce_date):
         output += ("ERROR: FAMILY: US11: " + other_fam["ID"] + ": Marriage date, " + other_fam["Married"] + " occurs within marriage of " + fam["ID"] + "\n")
-        
+       
         
 class testUserStory(unittest.TestCase):
     # check if birth is before marriage of parents
@@ -476,10 +467,8 @@ class testUserStory(unittest.TestCase):
         for indiv in indivs:
           if indiv["ID"] == husb_id or indiv["ID"] == wife_id:
             full_bday = indiv["Birthday"].split()
-            if (int(full_bday[2])+14 > int(married_date[2]) or
-                (int(full_bday[2])+14 == int(married_date[2]) and 
-                (months.index(full_bday[1])+1 > months.index(married_date[1])+1 or 
-                  (months.index(full_bday[1])+1 == months.index(married_date[1])+1 and int(full_bday[0]) > int(married_date[0]))))):
+            full_bday[2] = int(full_bday[2]) + 14
+            if earlierDate(married_date, full_bday):
               testValue = False
       self.assertTrue(testValue, message)
 
@@ -496,28 +485,16 @@ class testUserStory(unittest.TestCase):
           for indiv in indivs:
             if ((indiv["ID"] == husb_id or indiv["ID"] == wife_id) and
                 indiv["Death"] != "N/A"):
-              if divorce_date == "N/A":
+              if divorce_date == "N/A" or earlierDate(indiv["Death"].split(),divorce_date):
                 divorce_date = indiv["Death"].split()
-              elif (int(indiv["Death"].split()[2]) < int(divorce_date[2]) or
-                    (int(indiv["Death"].split()[2]) == int(divorce_date[2]) and 
-                    (months.index(indiv["Death"].split()[1])+1 < months.index(divorce_date[1])+1 or 
-                      (months.index(indiv["Death"].split()[1])+1 == months.index(divorce_date[1])+1 and int(indiv["Death"].split()[0]) < int(divorce_date[0]))))):
-                  divorce_date = indiv["Death"].split()
           if divorce_date == "N/A":
-            divorce_date = [full_today.day, months[full_today.month-1], full_today.year]
+            divorce_date = full_today
         else:
           divorce_date = fam["Divorced"].split()
         for other_fam in fams:
           if other_fam["ID"] != fam["ID"] and (husb_id == other_fam["Husband ID"] or wife_id == other_fam["Wife ID"]):
             other_married_date = other_fam["Married"].split()
-            if ((int(married_date[2]) < int(other_married_date[2]) or
-                (int(married_date[2]) == int(other_married_date[2]) and 
-                  (months.index(married_date[1])+1 < months.index(other_married_date[1])+1 or 
-                  (months.index(married_date[1])+1 == months.index(other_married_date[1])+1 and int(married_date[0]) < int(other_married_date[0]))))) and
-                (int(other_married_date[2]) < int(divorce_date[2]) or
-                (int(other_married_date[2]) == int(divorce_date[2]) and 
-                  (months.index(other_married_date[1])+1 < months.index(divorce_date[1])+1 or 
-                  (months.index(other_married_date[1])+1 == months.index(divorce_date[1])+1 and int(other_married_date[0]) < int(divorce_date[0])))))):
+            if earlierDate(married_date,other_married_date) and earlierDate(other_married_date,divorce_date):
               testValue = False
         self.assertTrue(testValue, message)
   
