@@ -389,13 +389,13 @@ for fam in fams:
 class testUserStory(unittest.TestCase):
     # check if birth is before marriage of parents
     def test_trueUS08(self): 
+      message = "Marriage of parents must be before birth of child!"
+      testValue = True
       for fam in fams:
         husb_id = fam["Husband ID"]
         wife_id = fam["Wife ID"]
         child_id = fam["Children"]
         for indiv in indivs:
-            message = "Marriage of parents must be before birth of child!"
-            testValue = True
             if indiv["ID"] in child_id:
                 full_child_bday = indiv["Birthday"].split()
                 full_mday = fam["Married"].split()
@@ -403,7 +403,7 @@ class testUserStory(unittest.TestCase):
                (months.index(full_mday[1])+1 > months.index(full_child_bday[1])+1 and 
                 int(full_mday[0]) > int(full_child_bday[0]))):
                     testValue = False
-        self.assertTrue(testValue, message) 
+      self.assertTrue(testValue, message) 
 
     #check if birth is after death of parents 
     def test_trueUS09(self):
