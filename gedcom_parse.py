@@ -380,7 +380,7 @@ dead = []
 for indiv in indivs:
     if indiv['Death'] != "N/A":
         dead.append(indiv["ID"])
-output += ("DECEASED INDIVIDUALS: US29: " + str(dead))
+output += ("DECEASED INDIVIDUALS: US29: " + str(dead)+ "\n")
 
 # list living individuals
 alive = []
@@ -393,7 +393,7 @@ for fam in fams:
         if (fam["Husband ID"] in alive) and (fam["Wife ID"] in alive):
             aliveMarried.append(fam["Husband ID"])
             aliveMarried.append(fam["Wife ID"])
-output += ("LIVING MARRIED INDIVIDUALS: U30: " + str(aliveMarried))
+output += ("LIVING MARRIED INDIVIDUALS: U30: " + str(aliveMarried) + "\n")
         
 class testUserStory(unittest.TestCase):
     # check if birth is before marriage of parents
