@@ -313,7 +313,7 @@ for fam in fams:
         output += ("ERROR: INDIVIDUAL: US09: " + indiv["ID"] + ": Mothers Death date, " + str(wife_dday) + " occurs before birth of child, " + str(child_bday) + "\n")
        
             
-# Maris Sprint 2
+# Daly Sprint 2
 
 # Check if multiple births are <5
 for fam in fams:
@@ -372,7 +372,28 @@ for fam in fams:
       other_married_date = other_fam["Married"].split()
       if earlierDate(married_date,other_married_date) and earlierDate(other_married_date,divorce_date):
         output += ("ERROR: FAMILY: US11: " + other_fam["ID"] + ": Marriage date, " + other_fam["Married"] + " occurs within marriage of " + fam["ID"] + "\n")
-       
+
+# Daly Sprint 3
+
+# list deceased individuals
+dead = []
+for indiv in indivs:
+    if indiv['Death'] != "N/A":
+        dead.append(indiv["ID"])
+output += ("DECEASED INDIVIDUALS: US29: " + str(dead))
+
+# list living individuals
+alive = []
+for indiv in indivs:
+    if indiv['Death'] == "N/A":
+        alive.append(indiv["ID"])
+aliveMarried = []
+for fam in fams:
+    if (fam['Married'] != 'N/A') and (fam["Divorced"] == "N/A"):
+        if (fam["Husband ID"] in alive) and (fam["Wife ID"] in alive):
+            aliveMarried.append(fam["Husband ID"])
+            aliveMarried.append(fam["Wife ID"])
+output += ("LIVING MARRIED INDIVIDUALS: U30: " + str(aliveMarried))
         
 class testUserStory(unittest.TestCase):
     # check if birth is before marriage of parents
@@ -489,6 +510,45 @@ class testUserStory(unittest.TestCase):
             if earlierDate(married_date,other_married_date) and earlierDate(other_married_date,divorce_date):
               testValue = False
         self.assertTrue(testValue, message)
+        
+    # Check that invididuals listed are deceased    
+    def test_trueUS29(self):
+        message("Individual listed is not deceased")
+        testValue = True
+        dead = []
+        for indiv in indivs:
+            if indiv['Death'] != "N/A":
+                dead.append(indiv)
+
+        for person in dead:
+            if person['Death'] == "N/A":
+                testValue = False
+        self.assertTrue(testValue, message)
+        
+    # Check that invididuals listed are alive and married  
+    def test_trueUS30(self):
+        message("Individual listed is not alive or married")
+        testValue = True
+        alive = []
+        for indiv in indivs:
+            if indiv['Death'] == "N/A":
+                alive.append(indiv["ID"])
+        aliveMarried = []
+        for fam in fams:
+            if (fam['Married'] != 'N/A') and (fam["Divorced"] == "N/A"):
+                if (fam["Husband ID"] in alive) and (fam["Wife ID"] in alive):
+                    aliveMarried.append(fam)
+            
+        for fam in aliveMarried:
+            if fam['Divorced'] != "N/A":
+                testValue = False
+            if fam['Married'] == "N/A":
+                testValue = False
+            if fam["Husband ID"] not in alive:
+                testValue = False
+            if fam["Wife ID"] not in alive:
+                testValue = False
+        self.assertTrue(testValue, message)   
   
 
 # Open output file
