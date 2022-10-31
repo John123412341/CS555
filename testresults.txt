@@ -2,7 +2,7 @@ Individuals
 +-------+------------------+--------+-------------+-----+-------+------------+----------+------------------+
 |   ID  |       Name       | Gender |   Birthday  | Age | Alive |   Death    |  Child   |      Spouse      |
 +-------+------------------+--------+-------------+-----+-------+------------+----------+------------------+
-|  @I1@ |   Joe /Smith/    |   M    |  4 AUG 1980 |  42 |  True |    N/A     | ['@F1@'] |       N/A        |
+|  @I1@ |   Joe /Smith/    |   M    |  4 AUG 1980 |  42 |  True |    N/A     | ['@F1@'] |     ['@F3@']     |
 |  @I2@ |   Susan /Sand/   |   F    | 10 SEP 1952 |  37 | False | 7 MAR 1990 |   N/A    | ['@F1@', '@F2@'] |
 |  @I3@ |  George /Smith/  |   M    | 12 SEP 1973 |  17 | False | 6 OCT 1990 |   N/A    |     ['@F1@']     |
 |  @I4@ |  Susie /Smtih/   |   F    |  5 AUG 1991 |  31 |  True |    N/A     | ['@F1@'] |       N/A        |
@@ -20,6 +20,9 @@ Individuals
 | @I16@ |  Kimmy /Smith/   |   F    |  1 OCT 1988 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
 | @I17@ |  Lauren /Smith/  |   F    |  1 JAN 1988 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
 | @I18@ |  Maeve /Smith/   |   F    |  1 OCT 1988 |  34 |  True |    N/A     | ['@F1@'] |       N/A        |
+| @I19@ |  Anton /Smith/   |   M    |  1 JAN 2002 |  20 |  True |    N/A     | ['@F3@'] |       N/A        |
+| @I20@ |   Jane /Smith/   |   M    | 14 APR 1900 | 122 |  True |    N/A     |   N/A    |     ['@F3@']     |
+| @I21@ |  Anton /Smith/   |   M    |  1 JAN 2002 |  20 |  True |    N/A     | ['@F3@'] |       N/A        |
 +-------+------------------+--------+-------------+-----+-------+------------+----------+------------------+
 Families 
 +------+------------+----------+------------+------------------+---------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
@@ -27,11 +30,34 @@ Families
 +------+------------+----------+------------+------------------+---------+--------------+----------------------------------------------------------------------------------------------------------------------------------+
 | @F1@ | 7 NOV 1985 |   N/A    |    @I3@    |  George /Smith/  |   @I2@  | Susan /Sand/ | ['@I1@', '@I4@', '@I5@', '@I6@', '@I7@', '@I8@', '@I9@', '@I10@', '@I12@', '@I13@', '@I14@', '@I15@', '@I16@', '@I17@', '@I18@'] |
 | @F2@ | 7 SEP 1987 |   N/A    |   @I11@    | Chester /Arthur/ |   @I2@  | Susan /Sand/ |                                                               N/A                                                                |
+| @F3@ | 1 JAN 2000 |   N/A    |    @I1@    |   Joe /Smith/    |  @I20@  | Jane /Smith/ |                                                        ['@I19@', '@I21@']                                                        |
 +------+------------+----------+------------+------------------+---------+--------------+----------------------------------------------------------------------------------------------------------------------------------+ 
 ERROR: INDIVIDUAL: US08: @I1@: Parents marriage date, 7 NOV 1985 occurs after birth of child, 4 AUG 1980
-ERROR: INDIVIDUAL: US09: @I18@: Fathers Death date, [6, 10, 1990] occurs before birth of child, [5, 8, 1991]
-ERROR: INDIVIDUAL: US09: @I18@: Mothers Death date, [7, 3, 1990] occurs before birth of child, [5, 8, 1991]
+ERROR: INDIVIDUAL: US09: @I21@: Fathers Death date, [6, 10, 1990] occurs before birth of child, [5, 8, 1991]
+ERROR: INDIVIDUAL: US09: @I21@: Mothers Death date, [7, 3, 1990] occurs before birth of child, [5, 8, 1991]
 ERROR: FAMILY: US14: @F1@: Multiple Births >= 5 
 ERROR: FAMILY: US15: @F1@: Number of siblings Not fewer than 15 
 ERROR: FAMILY: US10: @F1@: Marriage date, 7 NOV 1985 not at least 14 years after birth of both spouses
 ERROR: FAMILY: US11: @F2@: Marriage date, 7 SEP 1987 occurs within marriage of @F1@
+ERROR: INDIVIDUAL: US21: @I20@: Gender must be female.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
+ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.

@@ -1,3 +1,4 @@
+from email import message
 import unittest
 import datetime
 from datetime import datetime as dt
@@ -373,6 +374,31 @@ for fam in fams:
       if earlierDate(married_date,other_married_date) and earlierDate(other_married_date,divorce_date):
         output += ("ERROR: FAMILY: US11: " + other_fam["ID"] + ": Marriage date, " + other_fam["Married"] + " occurs within marriage of " + fam["ID"] + "\n")
 
+#Giovanni Sprint 3
+
+#checks to see if husband is male and wife is female
+
+for fam in fams:
+  husb_id = fam["Husband ID"]
+  wife_id = fam["Wife ID"]
+  for indiv in indivs:
+    if (husb_id == indiv["ID"]):
+      if(indiv["Gender"] != "M"):
+        output += ("ERROR: INDIVIDUAL: US21: " + indiv["ID"] + ": Gender must be male."+ "\n")
+    if (wife_id == indiv["ID"]):
+      if(indiv["Gender"] != "F"):
+        output += ("ERROR: INDIVIDUAL: US21: " + indiv["ID"] + ": Gender must be female." + "\n")
+##checks to make sure no two people have same name and birthday
+for indiv in indivs:
+  indiv_name_list = []
+  indiv_bday = []
+  for indiv in indivs:
+    if ((indiv["Name"] in indiv_name_list) and (indiv["Birthday"] in indiv_bday)):
+      output += ("ERROR: INDIVIDUAL: US23: " + indiv["ID"] + ": Same name and birthday cannot repeat." + "\n")
+    indiv_name_list.append(indiv["Name"])
+    indiv_bday.append(indiv["Birthday"])
+    
+
 # Daly Sprint 3
 
 # list deceased individuals
@@ -394,7 +420,11 @@ for fam in fams:
             aliveMarried.append(fam["Husband ID"])
             aliveMarried.append(fam["Wife ID"])
 output += ("LIVING MARRIED INDIVIDUALS: U30: " + str(aliveMarried) + "\n")
-        
+
+
+
+
+
 class testUserStory(unittest.TestCase):
     # check if birth is before marriage of parents
     def test_trueUS08(self): 
@@ -511,9 +541,40 @@ class testUserStory(unittest.TestCase):
               testValue = False
         self.assertTrue(testValue, message)
         
+
+    #checks to see if husband is male and wife is female
+    def test_trueUS21(self):
+      message = "Gender role in marriage is incorrect"
+      testValue = True
+      for fam in fams:
+        husb_id = fam["Husband ID"]
+        wife_id = fam["Wife ID"]
+        for indiv in indivs:
+          if (husb_id == indiv["ID"]):
+            if(indiv["Gender"] != "M"):
+              testValue = False
+          if (wife_id == indiv["ID"]):
+            if(indiv["Gender"] != "F"):
+              testValue = False
+        self.assertTrue(testValue, message)
+    
+    def test_trueUS23(self):
+      ##checks to make sure no two people have same name and birthday
+      for indiv in indivs:
+        message = "Individuals cannot have same name and birthday!"
+        testValue = True
+        indiv_name_list = []
+        indiv_bday = []
+        for indiv in indivs:
+          if ((indiv["Name"] in indiv_name_list) and (indiv["Birthday"] in indiv_bday)):
+            testValue = False
+          indiv_name_list.append(indiv["Name"])
+          indiv_bday.append(indiv["Birthday"])
+        self.assertTrue(testValue, message)
+
     # Check that invididuals listed are deceased    
     def test_trueUS29(self):
-        message("Individual listed is not deceased")
+        message = "Individual listed is not deceased"
         testValue = True
         dead = []
         for indiv in indivs:
@@ -527,7 +588,7 @@ class testUserStory(unittest.TestCase):
         
     # Check that invididuals listed are alive and married  
     def test_trueUS30(self):
-        message("Individual listed is not alive or married")
+        message = "Individual listed is not alive or married"
         testValue = True
         alive = []
         for indiv in indivs:

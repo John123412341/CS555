@@ -10,7 +10,7 @@ fam_tags = {"MARR":"Married","DIV":"Divorced","HUSB":"Husband ID","WIFE":"Wife I
 months = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"]
 
 # Open gedcom file
-gedcom_filename = "sprint2test.ged"
+gedcom_filename = "sprint3test.ged"
 with open(gedcom_filename, 'r') as fp:
     gedcom_data = fp.readlines()
 
@@ -372,8 +372,30 @@ for fam in fams:
       other_married_date = other_fam["Married"].split()
       if earlierDate(married_date,other_married_date) and earlierDate(other_married_date,divorce_date):
         output += ("ERROR: FAMILY: US11: " + other_fam["ID"] + ": Marriage date, " + other_fam["Married"] + " occurs within marriage of " + fam["ID"] + "\n")
-       
-        
+
+#giovanni sprint 3
+#checks to see if husband is male and wife is female
+for fam in fams:
+  husb_id = fam["Husband ID"]
+  wife_id = fam["Wife ID"]
+  for indiv in indivs:
+    if (husb_id == indiv["ID"]):
+      if(indiv["Gender"] != "M"):
+        output += ("ERROR: INDIVIDUAL: US21: " + indiv["ID"] + ": Gender must be male."+ "\n")
+    if (wife_id == indiv["ID"]):
+      if(indiv["Gender"] != "F"):
+        output += ("ERROR: INDIVIDUAL: US21: " + indiv["ID"] + ": Gender must be female." + "\n")
+##checks to make sure no two people have same name and birthday
+for indiv in indivs:
+  indiv_name_list = []
+  indiv_bday = []
+  for indiv in indivs:
+    if ((indiv["Name"] in indiv_name_list) and (indiv["Birthday"] in indiv_bday)):
+      output += ("ERROR: INDIVIDUAL: US23: " + indiv["ID"] + ": Same name and birthday cannot repeat." + "\n")
+    indiv_name_list.append(indiv["Name"])
+    indiv_bday.append(indiv["Birthday"])
+
+
 class testUserStory(unittest.TestCase):
     # check if birth is before marriage of parents
     def test_trueUS08(self): 
@@ -489,7 +511,35 @@ class testUserStory(unittest.TestCase):
             if earlierDate(married_date,other_married_date) and earlierDate(other_married_date,divorce_date):
               testValue = False
         self.assertTrue(testValue, message)
-  
+
+        
+    def test_trueUS21(self):
+      message = "Gender role in marriage is incorrect"
+      testValue = True
+      for fam in fams:
+        husb_id = fam["Husband ID"]
+        wife_id = fam["Wife ID"]
+        for indiv in indivs:
+          if (husb_id == indiv["ID"]):
+            if(indiv["Gender"] != "M"):
+              testValue = False
+          if (wife_id == indiv["ID"]):
+            if(indiv["Gender"] != "F"):
+              testValue = False
+        self.assertTrue(testValue, message)
+    def test_trueUS23(self):
+      ##checks to make sure no two people have same name and birthday
+      for indiv in indivs:
+        message = "Individuals cannot have same name and birthday!"
+        testValue = True
+        indiv_name_list = []
+        indiv_bday = []
+        for indiv in indivs:
+          if ((indiv["Name"] in indiv_name_list) and (indiv["Birthday"] in indiv_bday)):
+            testValue = False
+          indiv_name_list.append(indiv["Name"])
+          indiv_bday.append(indiv["Birthday"])
+        self.assertTrue(testValue, message)
 
 # Open output file
 output_filename = "testresults.txt"
