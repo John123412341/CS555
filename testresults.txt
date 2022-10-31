@@ -41,23 +41,3 @@ ERROR: FAMILY: US10: @F1@: Marriage date, 7 NOV 1985 not at least 14 years after
 ERROR: FAMILY: US11: @F2@: Marriage date, 7 SEP 1987 occurs within marriage of @F1@
 ERROR: INDIVIDUAL: US21: @I20@: Gender must be female.
 ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.
-ERROR: INDIVIDUAL: US23: @I21@: Same name and birthday cannot repeat.

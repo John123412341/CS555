@@ -386,14 +386,11 @@ for fam in fams:
       if(indiv["Gender"] != "F"):
         output += ("ERROR: INDIVIDUAL: US21: " + indiv["ID"] + ": Gender must be female." + "\n")
 ##checks to make sure no two people have same name and birthday
+name_bday_list = []
 for indiv in indivs:
-  indiv_name_list = []
-  indiv_bday = []
-  for indiv in indivs:
-    if ((indiv["Name"] in indiv_name_list) and (indiv["Birthday"] in indiv_bday)):
-      output += ("ERROR: INDIVIDUAL: US23: " + indiv["ID"] + ": Same name and birthday cannot repeat." + "\n")
-    indiv_name_list.append(indiv["Name"])
-    indiv_bday.append(indiv["Birthday"])
+  if ((indiv["Name"],indiv["Birthday"]) in name_bday_list):
+    output += ("ERROR: INDIVIDUAL: US23: " + indiv["ID"] + ": Same name and birthday cannot repeat." + "\n")
+  name_bday_list.append((indiv["Name"],indiv["Birthday"]))
 
 
 class testUserStory(unittest.TestCase):
@@ -529,17 +526,14 @@ class testUserStory(unittest.TestCase):
         self.assertTrue(testValue, message)
     def test_trueUS23(self):
       ##checks to make sure no two people have same name and birthday
+      message = "Individuals cannot have same name and birthday!"
+      testValue = True
+      name_bday_list = []
       for indiv in indivs:
-        message = "Individuals cannot have same name and birthday!"
-        testValue = True
-        indiv_name_list = []
-        indiv_bday = []
-        for indiv in indivs:
-          if ((indiv["Name"] in indiv_name_list) and (indiv["Birthday"] in indiv_bday)):
-            testValue = False
-          indiv_name_list.append(indiv["Name"])
-          indiv_bday.append(indiv["Birthday"])
-        self.assertTrue(testValue, message)
+        if ((indiv["Name"],indiv["Birthday"]) in name_bday_list):
+          testValue = False
+        name_bday_list.append((indiv["Name"],indiv["Birthday"]))
+      self.assertTrue(testValue, message)
 
 # Open output file
 output_filename = "testresults.txt"
