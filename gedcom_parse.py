@@ -419,6 +419,32 @@ for fam in fams:
 output += ("LIVING MARRIED INDIVIDUALS: U30: " + str(aliveMarried) + "\n")
 
 
+# Anton Sprint 3
+
+# List all single individuals today
+aliveSingle = []
+for indiv in indivs:
+  if (indiv["Spouse"] == "N/A"):
+    if(indiv["Age"] >= 30):
+      aliveSingle.append(indiv["ID"])
+output += ("LIVING SINGLE INDIVIDUALS: U31: " + str(aliveSingle) + "\n")
+
+# List multiple births
+multi_births = []
+for fam in fams:
+  birthdays = []
+  for child_id in fam["Children"]:
+    bday = ""
+    for indiv in indivs:
+      if indiv["ID"] == child_id:
+        bday = indiv["Birthday"]
+    birthdays.append((child_id, bday))
+  for birthday in birthdays:
+    for birthday2 in birthdays:
+      if birthday[1] == birthday2[1] and birthday[0] != birthday2[0] and {birthday[0],birthday2[0]} not in multi_births:
+        multi_births.append({birthday[0],birthday2[0]})
+output += ("MULTIPLE BIRTHS: U32: " + str(multi_births))
+
 
 
 
@@ -603,7 +629,36 @@ class testUserStory(unittest.TestCase):
                 testValue = False
             if fam["Wife ID"] not in alive:
                 testValue = False
-        self.assertTrue(testValue, message)   
+        self.assertTrue(testValue, message) 
+
+    def test_trueUS31(self):
+      # List all single individuals today
+      message = "Single individuals listed"
+      testValue = False
+      for indiv in indivs:
+        if (indiv["Spouse"] == "N/A"):
+          if(indiv["Age"] >= 30):
+            testValue = True
+      self.assertTrue(testValue, message)
+
+    def test_trueUS32(self):
+      # List multiple births
+      message = "Multiple births listed"
+      testValue = True
+      for fam in fams:
+        birthdays = []
+        for child_id in fam["Children"]:
+          bday = ""
+          for indiv in indivs:
+            if indiv["ID"] == child_id:
+              bday = indiv["Birthday"]
+          birthdays.append((child_id, bday))
+        for birthday in birthdays:
+          for birthday2 in birthdays:
+            if birthday[1] == birthday2[1] and birthday[0] != birthday2[0] and {birthday[0],birthday2[0]} not in multi_births:
+              multi_births.append({birthday[0],birthday2[0]})
+              testValue = True
+      self.assertTrue(testValue, message)
   
 
 # Open output file
