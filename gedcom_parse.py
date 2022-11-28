@@ -1,6 +1,7 @@
 from email import message
 import unittest
 import datetime
+from datetime import date, timedelta
 from datetime import datetime as dt
 from prettytable import PrettyTable
 
@@ -443,8 +444,30 @@ for fam in fams:
     for birthday2 in birthdays:
       if birthday[1] == birthday2[1] and birthday[0] != birthday2[0] and {birthday[0],birthday2[0]} not in multi_births:
         multi_births.append({birthday[0],birthday2[0]})
-output += ("MULTIPLE BIRTHS: U32: " + str(multi_births))
+output += ("MULTIPLE BIRTHS: U32: " + str(multi_births) + "\n")
 
+#Giovanni Sprint 4
+currentDate = dt.now()
+newBirths = []
+#List all people who were born in last 30 days
+for indiv in indivs:
+  full_bday = dt.strptime(indiv["Birthday"], '%d %b %Y')
+  time_between_insertion = currentDate - full_bday
+  if time_between_insertion.days<30:
+    newBirths.append(indiv["ID"])
+output += ("RECENT BIRTHS: U35: " + str(newBirths) + "\n")
+
+
+#list all people who died in past 30 days
+newDeaths = []
+#List all people who were born in last 30 days
+for indiv in indivs:
+  if(indiv["Death"] != "N/A"):
+    full_dday = dt.strptime(indiv["Death"], '%d %b %Y')
+    time_between_insertion = currentDate - full_dday
+    if time_between_insertion.days<30:
+      newDeaths.append(indiv["ID"])
+output += ("RECENT DEATHS: U35: " + str(newDeaths) + "\n")
 
 
 
