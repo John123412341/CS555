@@ -482,7 +482,7 @@ for indiv in indivs:
         nextBirthday = date(today.year + 1, x.month, x.day)
     delta = nextBirthday -today
     if delta.days <= 30:
-        output += ("LIST UPCOMING BIRTHDAYS: U39: " + indiv["ID"] + " birthday " + str(nextBirthday) + " occurs in " + str(delta.days) + " days" + "\n")
+        output += ("UPCOMING BIRTHDAY: U39: " + indiv["ID"] + " birthday " + str(nextBirthday) + " occurs in " + str(delta.days) + " days" + "\n")
 
 # List upcoming anniversaries
 for fam in fams:
@@ -494,7 +494,7 @@ for fam in fams:
         nextAnn = date(today.year + 1, x.month, x.day)
     delta = nextAnn -today
     if delta.days <= 30:
-        output += ("LIST UPCOMING Anniversaries: U40: " + fam["ID"] + " anniversary " + str(nextAnn) + " occurs in " + str(delta.days) + " days" + "\n")
+        output += ("UPCOMING Anniversary: U40: " + fam["ID"] + " anniversary " + str(nextAnn) + " occurs in " + str(delta.days) + " days" + "\n")
 
 
 
@@ -731,19 +731,19 @@ class testUserStory(unittest.TestCase):
         
     def test_true40(self):
     # list upcoming anniversaries
-    messsage = "Anniversary within 30 days"
-    testValue = False
-    for fam in fams:
-        x = dt.strptime(fam['Married'], '%d %b %Y')
-        x = x.date()
-        today =date.today()
-        nextAnn = date(today.year, x.month, x.day)
-        if nextAnn < today:
-            nextAnn = date(today.year + 1, x.month, x.day)
-        delta = nextAnn -today
-        if delta.days <= 30:
-            testValue = True
-    self.assertTrue(testValue, message)    
+      message = "Anniversary within 30 days"
+      testValue = False
+      for fam in fams:
+          x = dt.strptime(fam['Married'], '%d %b %Y')
+          x = x.date()
+          today =date.today()
+          nextAnn = date(today.year, x.month, x.day)
+          if nextAnn < today:
+              nextAnn = date(today.year + 1, x.month, x.day)
+          delta = nextAnn -today
+          if delta.days <= 30:
+              testValue = True
+      self.assertTrue(testValue, message)    
       
   
 
