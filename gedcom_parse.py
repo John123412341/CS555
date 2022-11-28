@@ -467,7 +467,7 @@ for indiv in indivs:
     time_between_insertion = currentDate - full_dday
     if time_between_insertion.days<30:
       newDeaths.append(indiv["ID"])
-output += ("RECENT DEATHS: U35: " + str(newDeaths) + "\n")
+output += ("RECENT DEATHS: U36: " + str(newDeaths) + "\n")
 
 
 # Daly Sprint 4
@@ -495,6 +495,49 @@ for fam in fams:
     delta = nextAnn -today
     if delta.days <= 30:
         output += ("UPCOMING Anniversary: U40: " + fam["ID"] + " anniversary " + str(nextAnn) + " occurs in " + str(delta.days) + " days" + "\n")
+
+
+# Anton Sprint 4
+
+# List orphans
+all_orphans = []
+for fam in fams:
+  husb_id = fam["Husband ID"]
+  wife_id = fam["Wife ID"]
+  child_ids = fam["Children"]
+  death_check = 0
+  underage_children = []
+  for indiv in indivs:
+    if ((indiv["ID"] == husb_id or indiv["ID"] == wife_id) and
+        not indiv["Alive"]):
+      death_check += 1
+    if (indiv["ID"] in child_ids and
+        indiv["Age"]<18):
+      underage_children.append(indiv["Name"])
+  if death_check == 2 and underage_children!=[]:
+    all_orphans.extend(underage_children)
+output += ("LIST ORPHANS: U33: " + ", ".join(all_orphans) + "\n")
+  
+# List recent survivors
+newDeaths = []
+for indiv in indivs:
+  if(indiv["Death"] != "N/A"):
+    full_dday = dt.strptime(indiv["Death"], '%d %b %Y')
+    time_between_insertion = currentDate - full_dday
+    if time_between_insertion.days<30:
+      newDeaths.append(indiv["ID"])
+survivors = []
+for indiv in indivs:
+  if indiv["ID"] in newDeaths:
+    if indiv["Child"] != "N/A":
+      survivors.extend(indiv["Child"])
+    if indiv["Spouse"] != "N/A":
+      survivors.extend(indiv["Spouse"])
+survivor_names = []
+for indiv in indivs:
+  if indiv["ID"] in survivors and indiv["Alive"]:
+    survivor_names.append(indiv["Name"])
+output += ("RECENT SURVIVORS: U37: " +  ", ".join(survivor_names) + "\n")
 
 
 
@@ -743,7 +786,52 @@ class testUserStory(unittest.TestCase):
           delta = nextAnn -today
           if delta.days <= 30:
               testValue = True
-      self.assertTrue(testValue, message)    
+      self.assertTrue(testValue, message)  
+
+
+    def test_true33(self):
+      # List orphans
+      message = "Orphans listed"
+      testValue = True
+      for fam in fams:
+        husb_id = fam["Husband ID"]
+        wife_id = fam["Wife ID"]
+        child_ids = fam["Children"]
+        death_check = 0
+        underage_children = []
+        for indiv in indivs:
+          if ((indiv["ID"] == husb_id or indiv["ID"] == wife_id) and
+              not indiv["Alive"]):
+            death_check += 1
+          if (indiv["ID"] in child_ids and
+              indiv["Age"]<18):
+            underage_children.append(indiv["Name"])
+        if death_check == 2 and underage_children!=[]:
+          testValue = False
+      self.assertTrue(testValue, message)
+  
+    def test_true37(self):
+      # List recent survivors
+      message = "Recent survivors listed"
+      testValue = True
+      newDeaths = []
+      for indiv in indivs:
+        if(indiv["Death"] != "N/A"):
+          full_dday = dt.strptime(indiv["Death"], '%d %b %Y')
+          time_between_insertion = currentDate - full_dday
+          if time_between_insertion.days<30:
+            newDeaths.append(indiv["ID"])
+      survivors = []
+      for indiv in indivs:
+        if indiv["ID"] in newDeaths:
+          if indiv["Child"] != "N/A":
+            survivors.extend(indiv["Child"])
+          if indiv["Spouse"] != "N/A":
+            survivors.extend(indiv["Spouse"])
+      for indiv in indivs:
+        if indiv["ID"] in survivors and indiv["Alive"]:
+          testValue = False
+      self.assertTrue(testValue, message)
       
   
 
