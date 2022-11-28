@@ -443,7 +443,34 @@ for fam in fams:
     for birthday2 in birthdays:
       if birthday[1] == birthday2[1] and birthday[0] != birthday2[0] and {birthday[0],birthday2[0]} not in multi_births:
         multi_births.append({birthday[0],birthday2[0]})
-output += ("MULTIPLE BIRTHS: U32: " + str(multi_births))
+output += ("MULTIPLE BIRTHS: U32: " + str(multi_births) + "\n")
+
+# Daly Sprint 4
+
+# List upcoming birthdays
+for indiv in indivs:
+    x = dt.strptime(indiv['Birthday'], '%d %b %Y')
+    x = x.date()
+    today =date.today()
+    nextBirthday = date(today.year, x.month, x.day)
+    if nextBirthday < today:
+        nextBirthday = date(today.year + 1, x.month, x.day)
+    delta = nextBirthday -today
+    if delta.days <= 30:
+        output += ("LIST UPCOMING BIRTHDAYS: U39: " + indiv["ID"] + " birthday " + str(nextBirthday) + " occurs in " + str(delta.days) + " days" + "\n")
+
+# List upcoming anniversaries
+for fam in fams:
+    x = dt.strptime(fam['Married'], '%d %b %Y')
+    x = x.date()
+    today =date.today()
+    nextAnn = date(today.year, x.month, x.day)
+    if nextAnn < today:
+        nextAnn = date(today.year + 1, x.month, x.day)
+    delta = nextAnn -today
+    if delta.days <= 30:
+        output += ("LIST UPCOMING Anniversaries: U40: " + fam["ID"] + " anniversary " + str(nextAnn) + " occurs in " + str(delta.days) + " days" + "\n")
+
 
 
 
@@ -659,6 +686,40 @@ class testUserStory(unittest.TestCase):
               multi_births.append({birthday[0],birthday2[0]})
               testValue = True
       self.assertTrue(testValue, message)
+    
+    def test_trueUS39(self):
+        # List upcoming birthdays
+        message = "Birthday within 30 days"
+        testValue = False
+        for indiv in indivs:
+            x = dt.strptime(indiv['Birthday'], '%d %b %Y')
+            x = x.date()
+            today =date.today()
+            nextBirthday = date(today.year, x.month, x.day)
+            if nextBirthday < today:
+                nextBirthday = date(today.year + 1, x.month, x.day)
+            delta = nextBirthday -today
+            if delta.days <= 30:
+                testValue = True
+        self.assertTrue(testValue, message)
+        
+        
+    def test_true40(self):
+    # list upcoming anniversaries
+    messsage = "Anniversary within 30 days"
+    testValue = False
+    for fam in fams:
+        x = dt.strptime(fam['Married'], '%d %b %Y')
+        x = x.date()
+        today =date.today()
+        nextAnn = date(today.year, x.month, x.day)
+        if nextAnn < today:
+            nextAnn = date(today.year + 1, x.month, x.day)
+        delta = nextAnn -today
+        if delta.days <= 30:
+            testValue = True
+    self.assertTrue(testValue, message)    
+      
   
 
 # Open output file
