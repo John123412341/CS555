@@ -461,7 +461,6 @@ output += ("RECENT BIRTHS: U35: " + str(newBirths) + "\n")
 
 #list all people who died in past 30 days
 newDeaths = []
-#List all people who were born in last 30 days
 for indiv in indivs:
   if(indiv["Death"] != "N/A"):
     full_dday = dt.strptime(indiv["Death"], '%d %b %Y')
